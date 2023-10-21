@@ -12,16 +12,7 @@ class HomeScreen extends StatelessWidget {
       extendBody: true,
       appBar: AppBar(
         title: const Text("Home"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              firebaseAuth
-                  .signOut()
-                  .then((value) => Get.offAll(() => const LoginView()));
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+        // centerTitle: false,
       ),
     );
   }

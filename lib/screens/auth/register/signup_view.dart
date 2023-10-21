@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/images.dart';
+import 'package:foodiezone/screens/profile/edit_user_profile.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class _SignUpViewState extends State<SignUpView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Sizebox
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
 
               // App logo
               Align(
@@ -160,19 +161,22 @@ class _SignUpViewState extends State<SignUpView> {
                         btnLoading = true;
                       });
 
+                      String username = firstNameController.text.toString();
+                      " ${lastNameController.text}";
+
                       AuthServices.createUser(
                         emailController.text,
                         passwordController.text,
+                        username,
                       ).then((value) async {
                         setState(() {
                           btnLoading = false;
                         });
-                        // Get.off(() => EditUserProfile(
-                        //       email: emailController.text.toString(),
-                        //       username: usernameController.text.toString(),
-                        //     ));
 
-                        Get.back();
+                        Get.off(() => EditUserProfile(
+                              email: emailController.text.toString(),
+                              username: username,
+                            ));
                       });
                     } on FirebaseAuthException catch (e) {
                       Utils.showToast(

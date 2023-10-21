@@ -5,5 +5,6 @@ Widget sloganWidget = const Text(
   appSlogan,
   style: TextStyle(
     fontSize: 18,
+    fontFamily: "DMSans Italic",
   ),
 );

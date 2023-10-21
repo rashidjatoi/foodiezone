@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/constants/strings.dart';
 import 'package:foodiezone/constants/widgets.dart';
+import 'package:foodiezone/screens/auth/password_recovery/password_recovery.dart';
 import 'package:foodiezone/screens/auth/register/signup_view.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/utils/utils.dart';
+import 'package:get/get.dart';
 import '../../../constants/images.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_textform_field.dart';
@@ -100,7 +101,9 @@ class _LoginViewState extends State<LoginView> {
               alignment: Alignment.topRight,
               child: TextButton(
                 child: const Text("Forget Password"),
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => PasswordRecoveryView());
+                },
               ),
             ),
             CustomButton(
