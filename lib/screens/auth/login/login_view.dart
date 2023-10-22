@@ -102,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
               child: TextButton(
                 child: const Text("Forget Password"),
                 onPressed: () {
-                  Get.to(() => PasswordRecoveryView());
+                  Get.to(() => const PasswordRecoveryView());
                 },
               ),
             ),

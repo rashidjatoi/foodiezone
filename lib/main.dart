@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/provider/home_provider.dart';
 import 'package:foodiezone/provider/theme_change_provider.dart';
-import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'screens/splash_screen/splash_screen.dart';
+import 'screens/spash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

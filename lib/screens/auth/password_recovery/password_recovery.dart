@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodiezone/services/auth_services.dart';
 
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_textformfield.dart';
@@ -11,19 +12,19 @@ class PasswordRecoveryView extends StatefulWidget {
 }
 
 class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
-  late TextEditingController passwordController;
+  late TextEditingController emailController;
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    passwordController = TextEditingController();
+    emailController = TextEditingController();
   }
 
   @override
   void dispose() {
     super.dispose();
-    passwordController.dispose();
+    emailController.dispose();
   }
 
   @override
@@ -64,10 +65,10 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
                   hintText: 'Email',
                   label: 'Email',
                   icon: Icons.email_outlined,
-                  textEditingController: passwordController,
+                  textEditingController: emailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter password';
+                      return 'Please enter Email';
                     }
                     return null;
                   },
@@ -78,7 +79,11 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
                 btnMargin: 0,
                 btnText: "Send Link",
                 ontap: () {
-                  if (formKey.currentState!.validate()) {}
+                  if (formKey.currentState!.validate()) {
+                    AuthServices.sendResetLink(
+                      emailController.text.toString(),
+                    );
+                  }
                 },
               ),
             ],

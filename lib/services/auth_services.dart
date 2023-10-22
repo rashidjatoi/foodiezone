@@ -67,6 +67,25 @@ class AuthServices {
   }
 
   // Sign out
+  static Future sendResetLink(email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email).then(
+            (value) => Utils.showToast(
+              message: "Check your Mail",
+              bgColor: Colors.red,
+              textColor: Colors.white,
+            ),
+          );
+    } catch (e) {
+      Utils.showToast(
+        message: e.toString(),
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
+  // Sign out
   static Future signOutUser() async {
     try {
       await firebaseAuth.signOut().then(

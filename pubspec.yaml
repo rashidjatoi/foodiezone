@@ -43,6 +43,8 @@ dependencies:
   image_picker: ^1.0.4
   provider: ^6.0.5
   scrollable_list_tabview: null
+  shadow_clip: ^0.0.1
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -63,6 +65,9 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+
+    - assets/images/real/
+    - assets/images/virtual/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -99,6 +104,31 @@ flutter:
       fonts:
         - asset: assets/fonts/DMSans-Italic.ttf
 
+    - family: Metropolis
+      fonts:
+        - asset: assets/fonts/Metropolis-Regular.ttf
+        - asset: assets/fonts/Metropolis-RegularItalic.ttf
+          style: italic
+        - asset: assets/fonts/Metropolis-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Metropolis-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/Metropolis-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/Metropolis-ExtraBoldItalic.ttf
+          style: italic
+          weight: 900
+        - asset: assets/fonts/Metropolis-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Metropolis-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Metropolis-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Metropolis-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
         
   #
   # For details regarding fonts from package dependencies,

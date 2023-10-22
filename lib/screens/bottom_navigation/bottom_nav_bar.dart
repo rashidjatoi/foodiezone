@@ -23,7 +23,7 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
     debugPrint("build");
 
     var pagesList = [
-      const HomeScreen(),
+      const HomeView(),
       const AddToFavouriteView(),
       Container(),
       const ProfileView()
