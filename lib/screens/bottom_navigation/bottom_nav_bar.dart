@@ -7,6 +7,7 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
 import '../favourite_view/add_to_favourite_view.dart';
+import '../help/help_view.dart';
 import '../profile/profile_view.dart';
 
 class BottomNavigationBarView extends StatefulWidget {
@@ -25,7 +26,7 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
     var pagesList = [
       const HomeView(),
       const AddToFavouriteView(),
-      Container(),
+      const HelpDeskView(),
       const ProfileView()
     ];
 

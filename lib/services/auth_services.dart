@@ -53,7 +53,7 @@ class AuthServices {
               ),
               if (firebaseAuth.currentUser != null)
                 {
-                  Get.off(() => const BottomNavigationBarView()),
+                  Get.offAll(() => const BottomNavigationBarView()),
                 }
             },
           );

@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "HostelBazaar.",
+          "FoodieZone.",
           style: TextStyle(fontFamily: "DMsans-Medium"),
         ),
         actions: [
@@ -47,9 +47,9 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Suitable Hostels",
+                    "Suitable Food Palces",
                     style: TextStyle(
-                      fontFamily: "DMsans-Medium",
+                      fontFamily: "Roboto Bold",
                       fontSize: 18,
                     ),
                   ),
@@ -57,9 +57,9 @@ class HomeView extends StatelessWidget {
                   const CustomSuitableWidget(),
                   const SizedBox(height: 25),
                   const Text(
-                    "Popular Hostels",
+                    "Popular Food Places",
                     style: TextStyle(
-                      fontFamily: "DMsans-Medium",
+                      fontFamily: "Roboto Bold",
                       fontSize: 18,
                     ),
                   ),
@@ -348,7 +348,7 @@ class CustomSuitableWidget extends StatelessWidget {
                             child: Container(
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage("assets/images/1.png"),
+                                  image: AssetImage("assets/images/borgor.jpg"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -379,14 +379,14 @@ class CustomSuitableWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         const Text(
-                          "Basic High Dpstr",
+                          "Crunchy Burger",
                           style: TextStyle(
                             fontFamily: "DMsans-Medium",
                             fontSize: 16,
                           ),
                         ),
                         const Text(
-                          "\$250",
+                          "\$10",
                           style: TextStyle(
                             fontFamily: "DMsans-Medium",
                             fontSize: 16,
@@ -428,7 +428,7 @@ class CustomHeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
-            "Search Hostels in any \nlocation",
+            "Search Food in any \nlocation",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: "DMsans-Bold",
@@ -440,7 +440,7 @@ class CustomHeaderWidget extends StatelessWidget {
           CupertinoButton(
             onPressed: () {},
             child: Container(
-              width: 120,
+              width: 140,
               height: 50,
               // padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
@@ -449,7 +449,7 @@ class CustomHeaderWidget extends StatelessWidget {
               ),
               child: const Center(
                 child: Text(
-                  "Find Hostels",
+                  "Food Everywhere",
                   style: TextStyle(
                     fontFamily: "DMsans-Medium",
                     fontSize: 15,
