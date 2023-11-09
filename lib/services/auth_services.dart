@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
+import 'package:foodiezone/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import '../utils/utils.dart';
 import 'services_constants.dart';
 
 class AuthServices {
   // Create user with email and password
-  static Future createUser(email, password, username) async {
+  static Future createUser(email, password) async {
     try {
       await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -53,7 +54,7 @@ class AuthServices {
               ),
               if (firebaseAuth.currentUser != null)
                 {
-                  Get.offAll(() => const BottomNavigationBarView()),
+                  Get.offAll(() => const HomeView()),
                 }
             },
           );

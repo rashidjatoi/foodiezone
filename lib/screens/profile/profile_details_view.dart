@@ -171,6 +171,7 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
               CustomButton(
                   btnText: "Update Profile",
                   loading: btnLoading,
+                  btnMargin: 0,
                   ontap: () async {
                     try {
                       setState(() {

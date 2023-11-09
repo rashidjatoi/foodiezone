@@ -12,6 +12,7 @@ class DatabaseServices {
     required String date,
     required String gender,
     required String cnic,
+    required String address,
   }) async {
     final user = firebaseAuth.currentUser;
     try {
@@ -19,13 +20,18 @@ class DatabaseServices {
         "username": username,
         "userId": user.uid,
         "email": email,
+        "address": address,
         "phone": phone,
         "date": date,
         "cninc": cnic,
         "gender": gender,
         "role": "user",
         "Timestamp": DateTime.now().toString(),
-      });
+      }).then((value) => Utils.showToast(
+            message: 'Profile Updated',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          ));
     } catch (e) {
       Utils.showToast(
         message: e.toString(),

@@ -60,7 +60,7 @@ class CustomButton extends StatelessWidget {
                   color: Theme.of(context).brightness == Brightness.dark
                       ? appcolor
                       : btnTextColor,
-                  fontFamily: "DMSans Medium",
+                  fontFamily: "Roboto Bold",
                   // fontSize: 18,
                 ),
               ),

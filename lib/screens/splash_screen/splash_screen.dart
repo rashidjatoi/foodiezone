@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/constants/images.dart';
-import 'package:foodiezone/constants/widgets.dart';
-import 'package:foodiezone/screens/auth/login/login_view.dart';
+import 'package:foodiezone/screens/onboard/landing_screen.dart';
 import 'package:foodiezone/screens/role/check_role.dart';
 import 'package:foodiezone/services/services_constants.dart';
+import 'package:foodiezone/utils/helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       timer = Timer(const Duration(seconds: 2), () {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginView()));
+            MaterialPageRoute(builder: (context) => const LandingScreen()));
       });
     }
   }
@@ -44,19 +43,26 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      body: SizedBox(
+        width: Helper.getScreenWidth(context),
+        height: Helper.getScreenHeight(context),
+        child: Stack(
           children: [
-            Image.asset(
-              appLogo,
-              height: 150,
+            SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Image.asset(
+                Helper.getAssetName("splashIcon.png", "virtual"),
+                fit: BoxFit.fill,
+              ),
             ),
-            const SizedBox(height: 20),
-            // App Slogan
-            sloganWidget,
+            Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/icons/logo.png',
+                height: 150,
+              ),
+            ),
           ],
         ),
       ),

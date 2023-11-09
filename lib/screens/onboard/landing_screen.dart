@@ -5,7 +5,7 @@ import 'package:foodiezone/screens/auth/register/signup_view.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:shadow_clip/shadow_clip.dart';
-import '../utils/helper.dart';
+import '../../utils/helper.dart';
 
 class LandingScreen extends StatelessWidget {
   static const routeName = "/landingScreen";
@@ -49,7 +49,8 @@ class LandingScreen extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Image.asset(
-              "assets/icons/applogo.png",
+              "assets/icons/logo.png",
+              height: 150,
             ),
           ),
           Align(

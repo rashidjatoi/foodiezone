@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/services/database_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-
 import '../../widgets/custom_textformfield.dart';
 
 class EditUserProfile extends StatefulWidget {
-  final String email;
-  final String username;
-
-  const EditUserProfile(
-      {super.key, required this.email, required this.username});
+  const EditUserProfile({super.key});
 
   @override
   State<EditUserProfile> createState() => _EditUserProfileState();
@@ -23,6 +19,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
   late TextEditingController phoneController;
   late TextEditingController dateController;
   late TextEditingController cnincController;
+  late TextEditingController addressController;
   final formKey = GlobalKey<FormState>();
 
   bool btnLoading = false;
@@ -36,6 +33,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
     phoneController = TextEditingController();
     dateController = TextEditingController();
     cnincController = TextEditingController();
+    addressController = TextEditingController();
   }
 
   @override
@@ -46,6 +44,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
     phoneController.dispose();
     dateController.dispose();
     cnincController.dispose();
+    addressController.dispose();
   }
 
   @override
@@ -59,15 +58,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 15),
-              Text(
-                "editProfileDetails",
-                style: const TextStyle(
-                  fontFamily: "DMsans-Regular",
-                  fontSize: 12,
-                ),
-              ),
               const SizedBox(height: 15),
               Form(
                 key: formKey,
@@ -122,18 +114,27 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       ),
                       child: Center(
                         child: DropdownButton(
-                          hint: const Text("Gender"),
+                          hint: Text(gender ?? "Gender"),
                           isExpanded: true,
                           underline:
                               const ColoredBox(color: Colors.transparent),
-                          items: const [
+                          items: [
                             DropdownMenuItem(
-                              value: "Male",
-                              child: Text("Female"),
-                            ),
+                                value: "Male",
+                                child: const Text("Male"),
+                                onTap: () {
+                                  setState(() {
+                                    gender = "Male";
+                                  });
+                                }),
                             DropdownMenuItem(
-                              value: "Male",
-                              child: Text("Male"),
+                              value: "Female",
+                              onTap: () {
+                                setState(() {
+                                  gender = "Female";
+                                });
+                              },
+                              child: const Text("Female"),
                             )
                           ],
                           onChanged: (value) {
@@ -159,6 +160,19 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     const SizedBox(height: 15),
                     CustomTextFormField(
+                      hintText: 'Address',
+                      label: 'Address',
+                      icon: IconlyLight.location,
+                      textEditingController: addressController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please Enter Address';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 15),
+                    CustomTextFormField(
                       hintText: 'CNIC',
                       label: 'CNIC',
                       icon: Icons.credit_card,
@@ -174,25 +188,38 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     CustomButton(
                       btnText: "Save Profile",
                       loading: btnLoading,
+                      btnMargin: 0,
+                      btnRadius: 15,
                       ontap: () {
                         if (formKey.currentState!.validate()) {
                           setState(() {
                             btnLoading = true;
                           });
-                          String email = widget.email;
-                          usernameController.text = widget.username.toString();
+
+                          // UserModel userModel = UserModel(
+                          //   username: usernameController.text.toString(),
+                          //   email: emailController.text.toString(),
+                          //   dateofbith: dateController.text.toString(),
+                          //   address: addressController.text.toString(),
+                          //   gender: gender.toString(),
+                          //   phone: phoneController.text.toString(),
+                          //   cninc: cnincController.text.toString(),
+                          //   userId: currentUser.toString(),
+                          // );
+
                           DatabaseServices.saveUserCredentials(
-                            email: email,
                             username: usernameController.text.toString(),
+                            email: emailController.text.toString(),
                             date: dateController.text.toString(),
+                            address: addressController.text.toString(),
                             gender: gender.toString(),
-                            cnic: cnincController.text.toString(),
                             phone: phoneController.text.toString(),
+                            cnic: cnincController.text.toString(),
                           ).then((value) {
                             setState(() {
                               btnLoading = false;
                             });
-                            Get.back();
+                            Get.offAll(() => const LoginView());
                           });
                         }
                       },

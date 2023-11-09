@@ -65,7 +65,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-
+    - assets/images/images/
     - assets/images/real/
     - assets/images/virtual/
   #   - images/a_dot_ham.jpeg

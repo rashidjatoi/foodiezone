@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/images.dart';
-import 'package:foodiezone/screens/profile/edit_user_profile.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:get/get.dart';
 import '../../../constants/widgets.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_textform_field.dart';
+import '../../account_type/account_type.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -19,16 +19,13 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   bool btnLoading = false;
 
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
   @override
   void initState() {
     super.initState();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
@@ -36,8 +33,7 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   void dispose() {
     super.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
+
     emailController.dispose();
     passwordController.dispose();
   }
@@ -82,35 +78,6 @@ class _SignUpViewState extends State<SignUpView> {
                   key: formKey,
                   child: Column(
                     children: [
-                      // first name textfield
-                      CustomTextFormField(
-                        labelText: "First Name",
-                        hintText: "First Name",
-                        textEditingController: firstNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter First Name';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      // Sizebox
-                      const SizedBox(height: 10),
-
-                      // Last Name textfield
-                      CustomTextFormField(
-                        labelText: "Last Name",
-                        hintText: "Last Name",
-                        textEditingController: lastNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter Last Name';
-                          }
-                          return null;
-                        },
-                      ),
-
                       // Email
                       const SizedBox(height: 10),
                       CustomTextFormField(
@@ -161,23 +128,15 @@ class _SignUpViewState extends State<SignUpView> {
                         btnLoading = true;
                       });
 
-                      String username = firstNameController.text.toString();
-                      " ${lastNameController.text}";
-
                       AuthServices.createUser(
                         emailController.text,
                         passwordController.text,
-                        username,
                       ).then((value) async {
                         setState(() {
                           btnLoading = false;
                         });
-
-                        Get.off(() => EditUserProfile(
-                              email: emailController.text.toString(),
-                              username: username,
-                            ));
                       });
+                      Get.offAll(() => const AccountTypeScreen());
                     } on FirebaseAuthException catch (e) {
                       Utils.showToast(
                         message: e.message.toString(),
