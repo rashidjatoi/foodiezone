@@ -41,6 +41,36 @@ class DatabaseServices {
     }
   }
 
+  static Future saveFoodProviderDetails({
+    required String email,
+    required String username,
+    required String phone,
+    required String address,
+  }) async {
+    final user = firebaseAuth.currentUser;
+    try {
+      await foodProviderDatabase.child(user!.uid).set({
+        "username": username,
+        "userId": user.uid,
+        "email": email,
+        "address": address,
+        "phone": phone,
+        "role": "foodprovider",
+        "Timestamp": DateTime.now().toString(),
+      }).then((value) => Utils.showToast(
+            message: 'Company Created',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          ));
+    } catch (e) {
+      Utils.showToast(
+        message: e.toString(),
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
   // Post User Messages
   static Future postMessages({message}) async {
     try {

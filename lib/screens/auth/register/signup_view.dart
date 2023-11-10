@@ -131,12 +131,9 @@ class _SignUpViewState extends State<SignUpView> {
                       AuthServices.createUser(
                         emailController.text,
                         passwordController.text,
-                      ).then((value) async {
-                        setState(() {
-                          btnLoading = false;
-                        });
+                      ).then((value) {
+                        Get.offAll(() => const AccountTypeScreen());
                       });
-                      Get.offAll(() => const AccountTypeScreen());
                     } on FirebaseAuthException catch (e) {
                       Utils.showToast(
                         message: e.message.toString(),

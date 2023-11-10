@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class FoodProviderViewButton extends StatelessWidget {
   final IconData icon;
@@ -34,10 +35,12 @@ class FoodProviderViewButton extends StatelessWidget {
         currentBrightness == Brightness.dark ? darkTextColor : lightTextColor;
 
     return Expanded(
-      child: GestureDetector(
-        onTap: ontap,
+      child: CupertinoButton(
+        onPressed: ontap,
+        padding: const EdgeInsets.all(0),
         child: Container(
           height: 100,
+          width: double.infinity,
           margin: const EdgeInsets.symmetric(
             horizontal: 10,
             vertical: 5,
@@ -52,9 +55,9 @@ class FoodProviderViewButton extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 40,
-                color: finalIconColor, // Use the final icon color
+                size: 40, color: finalIconColor, // Use the final icon color
               ),
+              const SizedBox(height: 15),
               Text(
                 iconText,
                 style: TextStyle(

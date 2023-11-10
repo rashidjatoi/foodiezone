@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/provider/home_provider.dart';
 import 'package:foodiezone/provider/theme_change_provider.dart';
-import 'package:foodiezone/screens/account_type/account_type.dart';
 import 'package:foodiezone/screens/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

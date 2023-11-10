@@ -191,6 +191,11 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                         Future.value(uploadTask).then((value) async {
                           var newUrl = await ref.getDownloadURL();
 
+                          foodProviderDatabase
+                              .child(widget.userData['uid'])
+                              .update({
+                            'imageUrl': newUrl,
+                          });
                           firebaseDatabase.child(widget.userData['uid']).update(
                             {
                               'imageUrl': newUrl,

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
 import 'package:foodiezone/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import '../utils/utils.dart';

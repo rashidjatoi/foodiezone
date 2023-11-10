@@ -45,7 +45,6 @@ dependencies:
   scrollable_list_tabview: null
   shadow_clip: ^0.0.1
 
-
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
@@ -99,7 +98,6 @@ flutter:
       fonts:
         - asset: assets/fonts/DMSans-Medium.ttf
 
-
     - family: DMSans Italic
       fonts:
         - asset: assets/fonts/DMSans-Italic.ttf
@@ -129,7 +127,5 @@ flutter:
         - asset: assets/fonts/Metropolis-SemiBoldItalic.ttf
           weight: 600
           style: italic
-        
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

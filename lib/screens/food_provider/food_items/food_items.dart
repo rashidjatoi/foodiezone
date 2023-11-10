@@ -1,0 +1,130 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:foodiezone/constants/colors.dart';
+import 'package:foodiezone/screens/food_provider/add_food_items/add_food_items.dart';
+import 'package:foodiezone/services/services_constants.dart';
+import 'package:get/get.dart';
+
+class FoodItemsView extends StatefulWidget {
+  const FoodItemsView({super.key});
+
+  @override
+  State<FoodItemsView> createState() => _FoodItemsViewState();
+}
+
+class _FoodItemsViewState extends State<FoodItemsView> {
+  bool btnLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Food Items"),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FirebaseAnimatedList(
+              scrollDirection: Axis.vertical,
+              query: foodProviderDatabase,
+              itemBuilder: (context, snapshot, animation, index) {
+                if (snapshot.value != null) {
+                  final food = snapshot.child('food');
+                  print(snapshot.child('food').value);
+                  final imageUrl =
+                      snapshot.child('food').child('imageUrl').value;
+
+                  final description =
+                      snapshot.child('food').child('description').value;
+
+                  final item =
+                      snapshot.child('food').child('fooditemname').value;
+
+                  final price = snapshot.child('food').child('price').value;
+
+                  final address = snapshot.child('address').value;
+
+                  print(snapshot.child('address').value);
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {},
+                        child: SizedBox(
+                          height: 400,
+                          width: 400,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: ClipRRect(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                          imageUrl.toString(),
+                                          errorListener: null,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                item.toString(),
+                                style: const TextStyle(
+                                  fontFamily: "DMsans-Medium",
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "\$ $price",
+                                style: const TextStyle(
+                                  fontFamily: "DMsans-Medium",
+                                  fontSize: 16,
+                                  color: Color(0xff059669),
+                                ),
+                              ),
+                              Text(
+                                "\$ $address",
+                                style: const TextStyle(
+                                  fontFamily: "DMsans-Medium",
+                                  fontSize: 16,
+                                  color: Color(0xff059669),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('No Data');
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: appcolor,
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Get.to(() => AddFoodItemsView());
+        },
+      ),
+    );
+  }
+}

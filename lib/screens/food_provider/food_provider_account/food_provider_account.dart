@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodiezone/screens/food_provider/food_items/food_items.dart';
+import 'package:foodiezone/screens/food_provider/food_provider_details/food_provider_details.dart';
 import 'package:foodiezone/screens/food_provider/widgets/admin_view_btn.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class FoodProviderAccount extends StatefulWidget {
@@ -23,14 +26,18 @@ class _FoodProviderAccountState extends State<FoodProviderAccount> {
           Row(
             children: [
               FoodProviderViewButton(
-                ontap: () {},
+                ontap: () {
+                  Get.to(() => const FoodProviderDetailsView());
+                },
                 icon: IconlyBold.profile,
                 iconText: "Create Profile",
               ),
               FoodProviderViewButton(
-                ontap: () {},
+                ontap: () {
+                  Get.to(() => const FoodItemsView());
+                },
                 icon: IconlyBold.bookmark,
-                iconText: "Pending Orders",
+                iconText: "Add Food Items",
               ),
             ],
           ),
@@ -39,7 +46,7 @@ class _FoodProviderAccountState extends State<FoodProviderAccount> {
               FoodProviderViewButton(
                 ontap: () {},
                 icon: IconlyBold.profile,
-                iconText: "Confirm Orders",
+                iconText: "Pending Orders",
               ),
               FoodProviderViewButton(
                 ontap: () {},
