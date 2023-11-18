@@ -27,11 +27,12 @@ class RoleCheckScreen extends StatelessWidget {
         } else if (snapshot.hasData) {
           Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as dynamic;
           final role = map[uid]["role"];
+          // print(role);
 
           if (role == 'admin') {
             // Navigate to admin panel
             return const AdminView();
-          } else if (role == 'hosteler') {
+          } else if (role == 'user') {
             // Navigate to admin panel
             return const HomeView();
           } else if (role == 'user') {

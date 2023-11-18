@@ -61,18 +61,18 @@ class LandingScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const Flexible(
+                  Flexible(
                     child: Text(
-                      "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep",
+                      'slogan'.tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "DMSans Medium",
                       ),
                     ),
                   ),
                   const SizedBox(height: 25),
                   CustomButton(
-                    btnText: "Sign In",
+                    btnText: 'signin'.tr,
                     btnMargin: 0,
                     btnRadius: 50,
                     ontap: () {
@@ -99,7 +99,7 @@ class LandingScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => const SignUpView());
                       },
-                      child: const Text("Create an Account"),
+                      child: Text('createaccount'.tr),
                     ),
                   ),
                   const Spacer(),

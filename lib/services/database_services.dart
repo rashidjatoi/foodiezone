@@ -71,6 +71,87 @@ class DatabaseServices {
     }
   }
 
+  static Future saveFoodDriverDetails({
+    required String email,
+    required String username,
+    required String phone,
+    required String address,
+  }) async {
+    final user = firebaseAuth.currentUser;
+    try {
+      await foodDriverDatabase.child(user!.uid).set({
+        "username": username,
+        "userId": user.uid,
+        "email": email,
+        "address": address,
+        "phone": phone,
+        "role": "fooddriver",
+        "Timestamp": DateTime.now().toString(),
+      }).then((value) => Utils.showToast(
+            message: 'Company Created',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          ));
+    } catch (e) {
+      Utils.showToast(
+        message: e.toString(),
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
+  static Future saveFoodOrders({
+    required Map<String, dynamic> order,
+  }) async {
+    final user = firebaseAuth.currentUser;
+    try {
+      await firebaseDatabase.child(user!.uid).update({
+        "order": order,
+      }).then((value) => Utils.showToast(
+            message: 'Order Placed',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          ));
+    } catch (e) {
+      Utils.showToast(
+        message: e.toString(),
+        bgColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
+  static Future saveFoodOrdersSection({
+    required String email,
+    required String username,
+    required String phone,
+    required String address,
+  }) async {
+    final user = firebaseAuth.currentUser;
+    try {
+      await foodProviderDatabase.child(user!.uid).set({
+        "username": username,
+        "userId": user.uid,
+        "email": email,
+        "address": address,
+        "phone": phone,
+        "role": "foodprovider",
+        "Timestamp": DateTime.now().toString(),
+      }).then((value) => Utils.showToast(
+            message: 'Company Created',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          ));
+    } catch (e) {
+      Utils.showToast(
+        message: e.toString(),
+        bgColor: Colors.green,
+        textColor: Colors.white,
+      );
+    }
+  }
+
   // Post User Messages
   static Future postMessages({message}) async {
     try {

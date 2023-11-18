@@ -6,6 +6,7 @@ final firebaseAuth = FirebaseAuth.instance;
 final user = firebaseAuth.currentUser;
 final firebaseDatabase = FirebaseDatabase.instance.ref('users');
 final foodProviderDatabase = FirebaseDatabase.instance.ref('foodprovider');
+final foodDriverDatabase = FirebaseDatabase.instance.ref('fooddriver');
 
 final databaseRef = FirebaseDatabase.instance.ref(user.toString());
 final hostelDatabase = FirebaseDatabase.instance.ref('Hostel');

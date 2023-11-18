@@ -2,17 +2,21 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
-import 'package:foodiezone/screens/favourite_view/add_to_favourite_view.dart';
+import 'package:foodiezone/screens/auth/login/login_view.dart';
+import 'package:foodiezone/screens/food_driver_screen/food_provider_screen.dart';
+import 'package:foodiezone/screens/search_food/search_food_screen.dart';
+import 'package:foodiezone/screens/user_order_view/user_order_view.dart';
 import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
 import 'package:foodiezone/screens/food_provider_details_to_client/food_provider_details_to_client.dart';
 import 'package:foodiezone/screens/help/help_view.dart';
 import 'package:foodiezone/screens/profile/profile_view.dart';
+import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:iconly/iconly.dart';
+import '../lanugage_screen/chage_language_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -43,9 +47,19 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const SearchFoodScreen());
+            },
             icon: const Icon(
               IconlyLight.search,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Get.to(() => const ChnageLanguageScreen());
+            },
+            icon: const Icon(
+              Icons.language,
             ),
           )
         ],
@@ -293,38 +307,70 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
-          ListTile(
-            title: const Text('Home'),
-            leading: const Icon(IconlyBold.home),
-            onTap: () {},
+          Card(
+            child: ListTile(
+              title: const Text('Home'),
+              leading: const Icon(IconlyBold.home),
+              onTap: () {},
+            ),
           ),
-          ListTile(
-            title: const Text('Favourite'),
-            leading: const Icon(IconlyBold.heart),
-            onTap: () {
-              Get.to(() => const AddToFavouriteView());
-            },
+          Card(
+            child: ListTile(
+              title: const Text('Orders'),
+              leading: const Icon(IconlyBold.heart),
+              onTap: () {
+                Get.to(() => const UserOrderView());
+              },
+            ),
           ),
-          ListTile(
-            title: const Text('Chat'),
-            leading: const Icon(IconlyBold.chat),
-            onTap: () {
-              Get.to(() => const HelpDeskView());
-            },
+          Card(
+            child: ListTile(
+              title: const Text('Chat'),
+              leading: const Icon(IconlyBold.chat),
+              onTap: () {
+                Get.to(() => const HelpDeskView());
+              },
+            ),
           ),
-          ListTile(
-            title: const Text('Food Provider'),
-            leading: const Icon(IconlyBold.work),
-            onTap: () {
-              Get.to(() => const FoodProviderAccount());
-            },
+          Card(
+            child: ListTile(
+              title: const Text('Food Provider'),
+              leading: const Icon(IconlyBold.work),
+              onTap: () {
+                Get.to(() => const FoodProviderAccount());
+              },
+            ),
           ),
-          ListTile(
-            title: const Text('Profile'),
-            leading: const Icon(IconlyBold.profile),
-            onTap: () {
-              Get.to(() => const ProfileView());
-            },
+          Card(
+            child: ListTile(
+              title: const Text('Food Driver'),
+              leading: const Icon(Icons.food_bank),
+              onTap: () {
+                Get.to(() => const FoodDriverView());
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text('Profile'),
+              leading: const Icon(IconlyBold.profile),
+              onTap: () {
+                Get.to(() => const ProfileView());
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: const Text('Sign Out'),
+              leading: const Icon(IconlyBold.logout),
+              onTap: () {
+                AuthServices.signOutUser().then((value) {
+                  Get.offAll(
+                    () => const LoginView(),
+                  );
+                });
+              },
+            ),
           ),
         ],
       ),

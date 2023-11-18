@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
+import 'package:foodiezone/lanugage/languages.dart';
 import 'package:foodiezone/provider/home_provider.dart';
 import 'package:foodiezone/provider/theme_change_provider.dart';
 import 'package:foodiezone/screens/splash_screen/splash_screen.dart';
@@ -10,6 +11,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -37,6 +39,9 @@ class _MyAppState extends State<MyApp> {
           return GetMaterialApp(
             title: 'FoodieZone',
             debugShowCheckedModeBanner: false,
+            translations: Languages(),
+            locale: const Locale('en', 'US'),
+            fallbackLocale: const Locale('en', 'US'),
             themeMode: themeChnager.themeMode,
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(

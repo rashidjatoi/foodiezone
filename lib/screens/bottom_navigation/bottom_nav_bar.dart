@@ -6,7 +6,7 @@ import 'package:foodiezone/screens/home/home_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
-import '../favourite_view/add_to_favourite_view.dart';
+import '../user_order_view/user_order_view.dart';
 import '../help/help_view.dart';
 import '../profile/profile_view.dart';
 
@@ -25,7 +25,7 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
 
     var pagesList = [
       const HomeView(),
-      const AddToFavouriteView(),
+      const UserOrderView(),
       const HelpDeskView(),
       const ProfileView()
     ];
