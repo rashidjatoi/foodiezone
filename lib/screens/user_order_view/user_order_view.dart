@@ -45,62 +45,64 @@ class _UserOrderViewState extends State<UserOrderView> {
                   Map<dynamic, dynamic> map =
                       snapshot.data!.snapshot.value as dynamic;
 
-                  debugPrint(map[uid]['order'].toString());
-                  final foodItemName =
-                      map[uid]['order']['foodItemName'].toString();
-                  final price = map[uid]['order']['foodPrice'].toString();
-
                   // print(map);
                   List<dynamic> list = [];
                   list.clear();
                   list = map.values.toList();
-
-                  // print(dataList);
-                  return Card(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 120,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              map[uid]['order']['foodImage'].toString(),
-                              height: 100,
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                foodItemName,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: "DMSans Bold",
-                                ),
+                  if (map[uid]['order'] != null) {
+                    debugPrint(map[uid]['order'].toString());
+                    final foodItemName =
+                        map[uid]['order']['foodItemName'].toString();
+                    final price = map[uid]['order']['foodPrice'].toString();
+                    // print(dataList);
+                    return Card(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        height: 120,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.network(
+                                map[uid]['order']['foodImage'].toString(),
+                                height: 100,
                               ),
-                              Text(
-                                "\$$price",
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: "DMSans Medium",
-                                ),
-                              ),
-                            ],
-                          ),
-                          CircleAvatar(
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(IconlyLight.buy),
                             ),
-                          )
-                        ],
+                            const SizedBox(width: 15),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  foodItemName,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: "DMSans Bold",
+                                  ),
+                                ),
+                                Text(
+                                  "\$$price",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: "DMSans Medium",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            CircleAvatar(
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(IconlyLight.buy),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    return SizedBox();
+                  }
                 }
               }),
         ],
