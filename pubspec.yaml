@@ -2,7 +2,7 @@ name: foodiezone
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: ">=3.1.4 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -47,8 +47,7 @@ dependencies:
   shadow_clip: ^0.0.1
   # shared_preferences: ^2.2.2
   # flutter_localization: ^0.1.14
-    # sdk: flutter
-
+  # sdk: flutter
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -108,30 +107,5 @@ flutter:
       fonts:
         - asset: assets/fonts/DMSans-Italic.ttf
 
-    - family: Metropolis
-      fonts:
-        - asset: assets/fonts/Metropolis-Regular.ttf
-        - asset: assets/fonts/Metropolis-RegularItalic.ttf
-          style: italic
-        - asset: assets/fonts/Metropolis-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Metropolis-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: assets/fonts/Metropolis-ExtraBold.ttf
-          weight: 900
-        - asset: assets/fonts/Metropolis-ExtraBoldItalic.ttf
-          style: italic
-          weight: 900
-        - asset: assets/fonts/Metropolis-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Metropolis-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Metropolis-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Metropolis-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
