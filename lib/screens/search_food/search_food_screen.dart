@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodiezone/screens/food_details_order/food_details_order.dart';
 import 'package:foodiezone/services/services_constants.dart';
-import 'package:foodiezone/widgets/custom_textform_field.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
@@ -34,8 +33,6 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String searchText = '';
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search Food'),
@@ -66,11 +63,11 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
               itemBuilder: (context, snapshot, animation, index) {
                 if (snapshot.value != null) {
                   final price = snapshot.child('food').child('price').value;
-                  final userId = snapshot.child('userId').value;
+                  // final userId = snapshot.child('userId').value;
 
-                  final userImage = snapshot.child('imageUrl').value;
+                  // final userImage = snapshot.child('imageUrl').value;
                   final address = snapshot.child('address').value;
-                  final phone = snapshot.child('phone').value;
+                  // final phone = snapshot.child('phone').value;
 
                   // debugPrint(snapshot.value.toString());
 
@@ -82,22 +79,22 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
 
                   final foodItemName =
                       snapshot.child('food').child("fooditemname").value;
-                  final providerName = snapshot.child('username').value;
-                  final email = snapshot.child('email').value;
+                  // final providerName = snapshot.child('username').value;
+                  // final email = snapshot.child('email').value;
                   // print(foodItemName);
 
-                  final Map<String, dynamic> userData = {
-                    "username": providerName,
-                    "address": address,
-                    "phone": phone,
-                    "userImage": userImage,
-                    "userId": userId,
-                    "email": email,
-                    "foodPrice": price,
-                    "foodImage": foodImage,
-                    "foodDescription": foodDescription,
-                    "foodItemName": foodItemName
-                  };
+                  // final Map<String, dynamic> userData = {
+                  //   "username": providerName,
+                  //   "address": address,
+                  //   "phone": phone,
+                  //   "userImage": userImage,
+                  //   "userId": userId,
+                  //   "email": email,
+                  //   "foodPrice": price,
+                  //   "foodImage": foodImage,
+                  //   "foodDescription": foodDescription,
+                  //   "foodItemName": foodItemName
+                  // };
                   final image = snapshot.child('imageUrl').value;
 
                   if (foodItemName.toString().toLowerCase().contains(

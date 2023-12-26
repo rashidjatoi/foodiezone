@@ -22,7 +22,7 @@ class _FoodProviderDetailsToClientViewState
     List<String> words = text.split(' ');
     if (words.length > maxWords) {
       words = words.sublist(0, maxWords);
-      return words.join(' ') + '...';
+      return '${words.join(' ')}...';
     }
     return text;
   }

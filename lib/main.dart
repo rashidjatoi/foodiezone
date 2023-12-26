@@ -29,55 +29,56 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => HomeProvider()),
-          ChangeNotifierProvider(create: (_) => ThemeChangeProvider()),
-        ],
-        builder: (context, child) {
-          final themeChnager = Provider.of<ThemeChangeProvider>(context);
+      providers: [
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeChangeProvider()),
+      ],
+      builder: (context, child) {
+        final themeChnager = Provider.of<ThemeChangeProvider>(context);
 
-          return GetMaterialApp(
-            title: 'FoodieZone',
-            debugShowCheckedModeBanner: false,
-            translations: Languages(),
-            locale: const Locale('en', 'US'),
-            fallbackLocale: const Locale('en', 'US'),
-            themeMode: themeChnager.themeMode,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: appcolor,
-              ),
-              appBarTheme: const AppBarTheme(
-                color: appcolor,
-                centerTitle: true,
-                titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  // fontWeight: FontWeight.bold,
-                ),
-                iconTheme: IconThemeData(
-                  color: Colors.white,
-                ),
-              ),
-              useMaterial3: true,
+        return GetMaterialApp(
+          title: 'FoodieZone',
+          debugShowCheckedModeBanner: false,
+          translations: Languages(),
+          locale: const Locale('en', 'US'),
+          fallbackLocale: const Locale('en', 'US'),
+          themeMode: themeChnager.themeMode,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: appcolor,
             ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              useMaterial3: true,
-              scaffoldBackgroundColor: const Color(0xff30384C),
-              appBarTheme: const AppBarTheme(
-                elevation: 0,
-                centerTitle: true,
-                backgroundColor: Color(0xff2C3448),
-                titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: "DMSans Bold",
-                ),
+            appBarTheme: const AppBarTheme(
+              color: appcolor,
+              centerTitle: true,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                // fontWeight: FontWeight.bold,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.white,
               ),
             ),
-            home: const SplashScreen(),
-          );
-        });
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            useMaterial3: true,
+            scaffoldBackgroundColor: const Color(0xff30384C),
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+              centerTitle: true,
+              backgroundColor: Color(0xff2C3448),
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: "DMSans Bold",
+              ),
+            ),
+          ),
+          home: const SplashScreen(),
+        );
+      },
+    );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/screens/food_provider/add_food_items/add_food_items.dart';
@@ -32,13 +30,13 @@ class _FoodItemsViewState extends State<FoodItemsView> {
               query: foodProviderDatabase,
               itemBuilder: (context, snapshot, animation, index) {
                 if (snapshot.value != null) {
-                  final food = snapshot.child('food');
-                  print(snapshot.child('food').value);
+                  // final food = snapshot.child('food');
+                  (snapshot.child('food').value.toString());
                   final imageUrl =
                       snapshot.child('food').child('imageUrl').value;
 
-                  final description =
-                      snapshot.child('food').child('description').value;
+                  // final description =
+                  //     snapshot.child('food').child('description').value;
 
                   final item =
                       snapshot.child('food').child('fooditemname').value;
@@ -47,63 +45,116 @@ class _FoodItemsViewState extends State<FoodItemsView> {
 
                   final address = snapshot.child('address').value;
 
-                  print(snapshot.child('address').value);
+                  debugPrint(snapshot.child('address').value.toString());
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CupertinoButton(
-                        padding: const EdgeInsets.all(0),
-                        onPressed: () {},
-                        child: SizedBox(
-                          height: 400,
-                          width: 400,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: ClipRRect(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: CachedNetworkImageProvider(
-                                          imageUrl.toString(),
-                                          errorListener: null,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          child: SizedBox(
+                            height: 400,
+                            width: 400,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: ClipRRect(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(25),
+                                          bottomRight: Radius.circular(25),
+                                          topLeft: Radius.circular(12),
+                                          topRight: Radius.circular(12),
                                         ),
-                                        fit: BoxFit.cover,
+                                        image: DecorationImage(
+                                          image: CachedNetworkImageProvider(
+                                            imageUrl.toString(),
+                                            errorListener: null,
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                item.toString(),
-                                style: const TextStyle(
-                                  fontFamily: "DMsans-Medium",
-                                  fontSize: 16,
+                                const SizedBox(height: 5),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            "Food Name: ",
+                                            style: TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            item.toString(),
+                                            style: const TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            "Price: ",
+                                            style: TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            "\$ $price",
+                                            style: const TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            "Location: ",
+                                            style: TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            " $address",
+                                            style: const TextStyle(
+                                              fontFamily: "DMsans-Medium",
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "\$ $price",
-                                style: const TextStyle(
-                                  fontFamily: "DMsans-Medium",
-                                  fontSize: 16,
-                                  color: Color(0xff059669),
-                                ),
-                              ),
-                              Text(
-                                "\$ $address",
-                                style: const TextStyle(
-                                  fontFamily: "DMsans-Medium",
-                                  fontSize: 16,
-                                  color: Color(0xff059669),
-                                ),
-                              ),
-                            ],
+                                const SizedBox(height: 12),
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                      const SizedBox(height: 12),
                     ],
                   );
                 } else {
@@ -122,7 +173,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
           color: Colors.white,
         ),
         onPressed: () {
-          Get.to(() => AddFoodItemsView());
+          Get.to(() => const AddFoodItemsView());
         },
       ),
     );

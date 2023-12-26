@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodiezone/screens/auth/login/login_view.dart';
+// import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/services/database_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
@@ -127,8 +127,6 @@ class _FoodProviderDetailsViewState extends State<FoodProviderDetailsView> {
                           setState(() {
                             btnLoading = true;
                           });
-
-                          
 
                           DatabaseServices.saveFoodProviderDetails(
                             username: usernameController.text.toString(),

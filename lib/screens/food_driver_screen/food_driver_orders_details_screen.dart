@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 class FoodDriverOrdersDetailsScreen extends StatefulWidget {
-  const FoodDriverOrdersDetailsScreen({Key? key});
+  const FoodDriverOrdersDetailsScreen({super.key});
 
   @override
   State<FoodDriverOrdersDetailsScreen> createState() =>

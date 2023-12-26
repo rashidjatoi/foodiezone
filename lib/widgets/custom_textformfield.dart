@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool canEdit;
   final String? Function(String?)? validator;
   final String label;
+  final TextInputType keyboardType;
   final TextEditingController textEditingController;
 
   const CustomTextFormField({
@@ -16,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     this.label = '',
     this.canEdit = true,
     required this.textEditingController,
+    this.keyboardType = TextInputType.text,
   });
 
   @override
@@ -24,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
       controller: textEditingController,
       validator: validator,
       enabled: canEdit,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         label: Text(label),
         prefixIcon: Icon(

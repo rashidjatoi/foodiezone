@@ -1,9 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/constants/colors.dart';
-import 'package:foodiezone/models/hostel_model.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:iconly/iconly.dart';
 
@@ -101,7 +97,7 @@ class _UserOrderViewState extends State<UserOrderView> {
                       ),
                     );
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 }
               }),
