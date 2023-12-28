@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/database_services.dart';
+import 'package:foodiezone/services/services_constants.dart';
+import 'package:foodiezone/utils/utils.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -151,16 +153,29 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
           CustomButton(
             btnText: "Place Order",
             btnRadius: 30,
-            ontap: () {
+            ontap: () async {
               int intValue = int.parse(widget.foodDetails['foodPrice']);
               int totalPrice = intValue * itemCount;
               Map<String, dynamic> foodOrder = {
                 "foodPrice": totalPrice.toString(),
                 "foodImage": widget.foodDetails['foodImage'],
                 "foodDescription": widget.foodDetails['foodDescription'],
-                "foodItemName": widget.foodDetails['foodItemName']
+                "foodItemName": widget.foodDetails['foodItemName'],
+                "userId": widget.foodDetails['userId'],
               };
 
+              await foodProviderDatabase
+                  .child(widget.foodDetails['userId'])
+                  .push()
+                  .set({
+                "order": foodOrder,
+              }).then(
+                (value) => Utils.showToast(
+                  message: 'Order Placed',
+                  bgColor: Colors.red,
+                  textColor: Colors.white,
+                ),
+              );
               DatabaseServices.saveFoodOrders(order: foodOrder).then(
                 (value) {
                   Get.back();

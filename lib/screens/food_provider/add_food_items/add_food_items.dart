@@ -195,6 +195,7 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
                                         foodProviderDatabase
                                             .child(map[uid]['userId'])
                                             .child('food')
+                                            .push()
                                             .set(
                                           {
                                             'imageUrl': newUrl,
@@ -203,6 +204,8 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
                                             'description':
                                                 description.text.toString(),
                                             'price': price.text.toString(),
+                                            'userId':
+                                                map[uid]['userId'].toString(),
                                           },
                                         ).then((value) {
                                           Utils.showToast(

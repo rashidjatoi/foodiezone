@@ -1,10 +1,16 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodiezone/constants/colors.dart';
 // import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/services/database_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import '../../../widgets/custom_textformfield.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FoodProviderDetailsView extends StatefulWidget {
   const FoodProviderDetailsView({super.key});
@@ -42,6 +48,23 @@ class _FoodProviderDetailsViewState extends State<FoodProviderDetailsView> {
     addressController.dispose();
   }
 
+  File? image;
+  final picker = ImagePicker();
+
+  Future getImageGalley() async {
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 60);
+    setState(
+      () {
+        if (pickedFile != null) {
+          image = File(pickedFile.path);
+        } else {
+          debugPrint("No image picked");
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,11 +79,37 @@ class _FoodProviderDetailsViewState extends State<FoodProviderDetailsView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 15),
-              Image.asset(
-                "assets/images/images/rider.png",
-                height: 200,
-              ),
+              // Image.asset(
+              //   "assets/images/images/rider.png",
+              //   height: 200,
+              // ),
               const SizedBox(height: 15),
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: getImageGalley,
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey.shade200,
+                  child: ClipOval(
+                    child: image != null
+                        ? Image.file(
+                            image!.absolute,
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                          )
+                        : Icon(
+                            IconlyBold.image,
+                            size: 50,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? customThemeColor
+                                    : Colors.black,
+                          ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               Form(
                 key: formKey,
                 child: Column(
@@ -128,17 +177,33 @@ class _FoodProviderDetailsViewState extends State<FoodProviderDetailsView> {
                             btnLoading = true;
                           });
 
-                          DatabaseServices.saveFoodProviderDetails(
-                            username: usernameController.text.toString(),
-                            email: emailController.text.toString(),
-                            address: addressController.text.toString(),
-                            phone: phoneController.text.toString(),
-                          ).then((value) {
-                            setState(() {
-                              btnLoading = false;
+                          if (image != null) {
+                            final newId = DateTime.now().millisecondsSinceEpoch;
+
+                            firebase_storage.Reference ref = firebase_storage
+                                .FirebaseStorage.instance
+                                .ref("/users/$newId");
+
+                            firebase_storage.UploadTask uploadTask =
+                                ref.putFile(image!.absolute);
+
+                            Future.value(uploadTask).then((value) async {
+                              var imageUrl = await ref.getDownloadURL();
+
+                              DatabaseServices.saveFoodProviderDetails(
+                                username: usernameController.text.toString(),
+                                newUrl: imageUrl,
+                                email: emailController.text.toString(),
+                                address: addressController.text.toString(),
+                                phone: phoneController.text.toString(),
+                              ).then((value) {
+                                setState(() {
+                                  btnLoading = false;
+                                });
+                                Get.back();
+                              });
                             });
-                            Get.back();
-                          });
+                          }
                         }
                       },
                     )

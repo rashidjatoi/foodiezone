@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
@@ -108,18 +110,32 @@ class _FoodProviderDetailsToClientViewState
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
+              child: FirebaseAnimatedList(
+                query: foodProviderDatabase
+                    .child(widget.userData["userId"])
+                    .child("food"),
+                itemBuilder: (context, snapshot, animation, index) {
+                  print(snapshot.value.toString());
+
+                  final price = snapshot.child('price').value;
+                  final userId = snapshot.child('userId').value;
+
+                  final foodImage = snapshot.child("imageUrl").value;
+
+                  final foodDescription = snapshot.child("description").value;
+
+                  final foodItemName = snapshot.child("fooditemname").value;
+
                   return Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: InkWell(
                       onTap: () {
                         Map<String, dynamic> foodDetails = {
-                          "foodPrice": widget.userData['foodPrice'],
-                          "foodImage": widget.userData['foodImage'],
-                          "foodDescription": widget.userData['foodDescription'],
-                          "foodItemName": widget.userData['foodItemName']
+                          "foodPrice": price,
+                          "foodImage": foodImage,
+                          "foodDescription": foodDescription,
+                          "foodItemName": foodItemName,
+                          "userId": userId,
                         };
 
                         Get.to(() => FoodDetailsOrderView(
@@ -131,7 +147,7 @@ class _FoodProviderDetailsToClientViewState
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
                             child: CachedNetworkImage(
-                              imageUrl: widget.userData['foodImage'],
+                              imageUrl: foodImage.toString(),
                               fit: BoxFit.cover,
                               width: 100,
                               height: 100,
@@ -149,7 +165,7 @@ class _FoodProviderDetailsToClientViewState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                widget.userData['foodItemName'],
+                                foodItemName.toString(),
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontFamily: "DMSans Bold",
@@ -160,12 +176,12 @@ class _FoodProviderDetailsToClientViewState
                                 children: [
                                   Text(
                                     truncateText(
-                                      widget.userData['foodDescription'],
+                                      foodDescription.toString(),
                                       5,
                                     ),
                                   ),
                                   Text(
-                                    "\$${widget.userData['foodPrice']}",
+                                    "\$$price ",
                                     style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,

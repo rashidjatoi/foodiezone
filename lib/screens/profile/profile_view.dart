@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
+import 'package:foodiezone/screens/food_driver_screen/food_provider_screen.dart';
+import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
 import 'package:foodiezone/screens/profile/profile_details_view.dart';
 import 'package:foodiezone/screens/theme/change_theme_view.dart';
 import 'package:foodiezone/services/auth_services.dart';
@@ -147,20 +149,26 @@ class ProfileView extends StatelessWidget {
                                       ProfileDetailsView(userData: userData));
                                 },
                               ),
-                              CustomListTile(
-                                tileText: "Payment methods",
-                                tileIcon: IconlyLight.setting,
-                                ontap: () {},
+                              ListTile(
+                                leading: const Icon(IconlyLight.profile),
+                                onTap: map[uid]['role'] == "foodProvider"
+                                    ? () {
+                                        Get.to(
+                                            () => const FoodProviderAccount());
+                                      }
+                                    : null,
+                                title: const Text("Food Provider"),
+                                trailing: const Icon(Icons.arrow_forward_ios),
                               ),
-                              CustomListTile(
-                                tileText: "My Address",
-                                tileIcon: IconlyLight.location,
-                                ontap: () {},
-                              ),
-                              CustomListTile(
-                                tileText: "Contact Preferences",
-                                tileIcon: IconlyLight.chat,
-                                ontap: () {},
+                              ListTile(
+                                leading: const Icon(IconlyLight.profile),
+                                onTap: map[uid]['role'] == "foodProvider"
+                                    ? () {
+                                        Get.to(() => const FoodDriverView());
+                                      }
+                                    : null,
+                                title: const Text("Food Driver"),
+                                trailing: const Icon(Icons.arrow_forward_ios),
                               ),
                               CustomListTile(
                                 tileText: "Help",

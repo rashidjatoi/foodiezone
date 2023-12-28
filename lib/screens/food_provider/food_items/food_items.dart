@@ -16,6 +16,15 @@ class FoodItemsView extends StatefulWidget {
 class _FoodItemsViewState extends State<FoodItemsView> {
   bool btnLoading = false;
 
+  String truncateText(String text, int maxWords) {
+    List<String> words = text.split(' ');
+    if (words.length > maxWords) {
+      words = words.sublist(0, maxWords);
+      return '${words.join(' ')}...';
+    }
+    return text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,28 +35,23 @@ class _FoodItemsViewState extends State<FoodItemsView> {
         children: [
           Expanded(
             child: FirebaseAnimatedList(
-              scrollDirection: Axis.vertical,
-              query: foodProviderDatabase,
+              query: foodProviderDatabase
+                  .child(firebaseAuth.currentUser!.uid)
+                  .child("food"),
               itemBuilder: (context, snapshot, animation, index) {
-                if (snapshot.value != null) {
-                  // final food = snapshot.child('food');
-                  (snapshot.child('food').value.toString());
-                  final imageUrl =
-                      snapshot.child('food').child('imageUrl').value;
+                print(snapshot.value.toString());
 
-                  // final description =
-                  //     snapshot.child('food').child('description').value;
+                final price = snapshot.child('price').value;
 
-                  final item =
-                      snapshot.child('food').child('fooditemname').value;
+                final foodImage = snapshot.child("imageUrl").value;
 
-                  final price = snapshot.child('food').child('price').value;
+                final foodDescription = snapshot.child("description").value;
 
-                  final address = snapshot.child('address').value;
+                final foodItemName = snapshot.child("fooditemname").value;
 
-                  debugPrint(snapshot.child('address').value.toString());
-
-                  return Column(
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -71,7 +75,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                                         ),
                                         image: DecorationImage(
                                           image: CachedNetworkImageProvider(
-                                            imageUrl.toString(),
+                                            foodImage.toString(),
                                             errorListener: null,
                                           ),
                                           fit: BoxFit.cover,
@@ -97,7 +101,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
-                                            item.toString(),
+                                            foodItemName.toString(),
                                             style: const TextStyle(
                                               fontFamily: "DMsans-Medium",
                                               fontSize: 16,
@@ -128,7 +132,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                                       Row(
                                         children: [
                                           const Text(
-                                            "Location: ",
+                                            "Description: ",
                                             style: TextStyle(
                                               fontFamily: "DMsans-Medium",
                                               fontSize: 18,
@@ -137,7 +141,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
-                                            " $address",
+                                            foodDescription.toString(),
                                             style: const TextStyle(
                                               fontFamily: "DMsans-Medium",
                                               fontSize: 16,
@@ -156,10 +160,8 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                       ),
                       const SizedBox(height: 12),
                     ],
-                  );
-                } else {
-                  return const Text('No Data');
-                }
+                  ),
+                );
               },
             ),
           ),

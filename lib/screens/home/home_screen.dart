@@ -334,24 +334,6 @@ class _HomeViewState extends State<HomeView> {
           ),
           Card(
             child: ListTile(
-              title: const Text('Food Provider'),
-              leading: const Icon(IconlyBold.work),
-              onTap: () {
-                Get.to(() => const FoodProviderAccount());
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: const Text('Food Driver'),
-              leading: const Icon(Icons.food_bank),
-              onTap: () {
-                Get.to(() => const FoodDriverView());
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
               title: const Text('Profile'),
               leading: const Icon(IconlyBold.profile),
               onTap: () {

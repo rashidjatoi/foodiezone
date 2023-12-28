@@ -46,6 +46,7 @@ class DatabaseServices {
     required String username,
     required String phone,
     required String address,
+    required String newUrl,
   }) async {
     final user = firebaseAuth.currentUser;
     try {
@@ -54,6 +55,7 @@ class DatabaseServices {
         "userId": user.uid,
         "email": email,
         "address": address,
+        'imageUrl': newUrl,
         "phone": phone,
         "role": "foodprovider",
         "Timestamp": DateTime.now().toString(),
