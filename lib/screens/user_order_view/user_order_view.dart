@@ -1,7 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/services_constants.dart';
-import 'package:iconly/iconly.dart';
 
 class UserOrderView extends StatefulWidget {
   const UserOrderView({super.key});
@@ -50,13 +49,13 @@ class _UserOrderViewState extends State<UserOrderView> {
                     final foodItemName =
                         map[uid]['order']['foodItemName'].toString();
                     final price = map[uid]['order']['foodPrice'].toString();
+                    final userId = map[uid]['order']['userId'].toString();
                     // print(dataList);
                     return Card(
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         height: 120,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
@@ -65,7 +64,7 @@ class _UserOrderViewState extends State<UserOrderView> {
                                 height: 100,
                               ),
                             ),
-                            const SizedBox(width: 15),
+                            const SizedBox(width: 5),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -86,10 +85,18 @@ class _UserOrderViewState extends State<UserOrderView> {
                                 ),
                               ],
                             ),
+                            const Spacer(),
                             CircleAvatar(
                               child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(IconlyLight.buy),
+                                onPressed: () async {
+                                  firebaseDatabase
+                                      .child(userId)
+                                      .child("order")
+                                      .remove();
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                ),
                               ),
                             )
                           ],

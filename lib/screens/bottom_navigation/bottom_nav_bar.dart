@@ -26,7 +26,7 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
     var pagesList = [
       const HomeView(),
       const UserOrderView(),
-      const HelpDeskView(),
+      // const HelpDeskView(),
       const ProfileView()
     ];
 
@@ -75,24 +75,24 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
                       },
                       isSelected: value.currentIndex == 1,
                     )),
-            Consumer<HomeProvider>(
-              builder: (context, value, child) => CustomBottomNavigationButton(
-                selectedIcon: IconlyBold.chat,
-                icon: IconlyLight.chat,
-                onPressed: () {
-                  value.changeIndex(2);
-                },
-                isSelected: value.currentIndex == 2,
-              ),
-            ),
+            // Consumer<HomeProvider>(
+            //   builder: (context, value, child) => CustomBottomNavigationButton(
+            //     selectedIcon: IconlyBold.chat,
+            //     icon: IconlyLight.chat,
+            //     onPressed: () {
+            //       value.changeIndex(2);
+            //     },
+            //     isSelected: value.currentIndex == 2,
+            //   ),
+            // ),
             Consumer<HomeProvider>(
               builder: (context, value, child) => CustomBottomNavigationButton(
                 selectedIcon: IconlyBold.profile,
                 icon: IconlyLight.profile,
                 onPressed: () {
-                  value.changeIndex(3);
+                  value.changeIndex(2);
                 },
-                isSelected: value.currentIndex == 3,
+                isSelected: value.currentIndex == 2,
               ),
             ),
           ],

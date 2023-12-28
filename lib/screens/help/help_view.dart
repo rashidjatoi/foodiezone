@@ -74,8 +74,7 @@ class _HelpDeskViewState extends State<HelpDeskView> {
                     key: formKey,
                     child: CustomTextFormField(
                       hintText: "Say Hi!",
-                      // label: "Say Hi!",
-
+                      label: "Say Hi!",
                       icon: IconlyLight.message,
                       textEditingController: message,
                       validator: (value) {

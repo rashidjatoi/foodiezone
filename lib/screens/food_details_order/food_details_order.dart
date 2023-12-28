@@ -156,26 +156,30 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
             ontap: () async {
               int intValue = int.parse(widget.foodDetails['foodPrice']);
               int totalPrice = intValue * itemCount;
+              final currentUserId = firebaseAuth.currentUser!.uid.toString();
               Map<String, dynamic> foodOrder = {
                 "foodPrice": totalPrice.toString(),
                 "foodImage": widget.foodDetails['foodImage'],
                 "foodDescription": widget.foodDetails['foodDescription'],
                 "foodItemName": widget.foodDetails['foodItemName'],
                 "userId": widget.foodDetails['userId'],
+                "currentUserId": currentUserId,
               };
 
               await foodProviderDatabase
                   .child(widget.foodDetails['userId'])
+                  .child('order')
                   .push()
-                  .set({
-                "order": foodOrder,
-              }).then(
-                (value) => Utils.showToast(
-                  message: 'Order Placed',
-                  bgColor: Colors.red,
-                  textColor: Colors.white,
-                ),
-              );
+                  .set(
+                    foodOrder,
+                  )
+                  .then(
+                    (value) => Utils.showToast(
+                      message: 'Order Placed',
+                      bgColor: Colors.red,
+                      textColor: Colors.white,
+                    ),
+                  );
               DatabaseServices.saveFoodOrders(order: foodOrder).then(
                 (value) {
                   Get.back();

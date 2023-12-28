@@ -108,13 +108,18 @@ class DatabaseServices {
   }) async {
     final user = firebaseAuth.currentUser;
     try {
-      await firebaseDatabase.child(user!.uid).update({
-        "order": order,
-      }).then((value) => Utils.showToast(
-            message: 'Order Placed',
-            bgColor: Colors.red,
-            textColor: Colors.white,
-          ));
+      await firebaseDatabase
+          .child(user!.uid)
+          .child('order')
+          .push()
+          .set(
+            order,
+          )
+          .then((value) => Utils.showToast(
+                message: 'Order Placed',
+                bgColor: Colors.red,
+                textColor: Colors.white,
+              ));
     } catch (e) {
       Utils.showToast(
         message: e.toString(),
