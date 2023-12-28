@@ -115,7 +115,7 @@ class _FoodProviderDetailsToClientViewState
                     .child(widget.userData["userId"])
                     .child("food"),
                 itemBuilder: (context, snapshot, animation, index) {
-                  print(snapshot.value.toString());
+                  debugPrint(snapshot.value.toString());
 
                   final price = snapshot.child('price').value;
                   final userId = snapshot.child('userId').value;

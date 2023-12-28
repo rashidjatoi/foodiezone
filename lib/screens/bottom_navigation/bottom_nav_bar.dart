@@ -5,9 +5,7 @@ import 'package:foodiezone/screens/bottom_navigation/custom_bottom_navigation_bt
 import 'package:foodiezone/screens/home/home_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
-
 import '../user_order_view/user_order_view.dart';
-import '../help/help_view.dart';
 import '../profile/profile_view.dart';
 
 class BottomNavigationBarView extends StatefulWidget {

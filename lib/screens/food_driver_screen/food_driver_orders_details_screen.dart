@@ -24,7 +24,7 @@ class _FoodDriverOrdersDetailsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders"),
+        title: const Text("Orders Details"),
         centerTitle: false,
       ),
       body: Padding(

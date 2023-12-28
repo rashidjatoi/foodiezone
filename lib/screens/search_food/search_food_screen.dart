@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/food_details_order/food_details_order.dart';
 import 'package:foodiezone/services/services_constants.dart';

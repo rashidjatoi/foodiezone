@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/constants/colors.dart';
-import 'package:foodiezone/screens/food_provider/add_food_items/add_food_items.dart';
 import 'package:foodiezone/screens/food_provider_details_to_client/food_provider_details_to_client.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
@@ -29,7 +27,6 @@ class _FoodItemListScreenState extends State<FoodItemListScreen> {
         children: [
           Expanded(
             child: FirebaseAnimatedList(
-              // scrollDirection: Axis.vertical,
               query: foodProviderDatabase,
               itemBuilder: (context, snapshot, animation, index) {
                 if (snapshot.value != null) {
@@ -39,8 +36,6 @@ class _FoodItemListScreenState extends State<FoodItemListScreen> {
                   final userImage = snapshot.child('imageUrl').value;
                   final address = snapshot.child('address').value;
                   final phone = snapshot.child('phone').value;
-
-                  // debugPrint(snapshot.value.toString());
 
                   final foodImage =
                       snapshot.child('food').child("imageUrl").value;
@@ -52,7 +47,6 @@ class _FoodItemListScreenState extends State<FoodItemListScreen> {
                       snapshot.child('food').child("fooditemname").value;
                   final providerName = snapshot.child('username').value;
                   final email = snapshot.child('email').value;
-                  // print(foodItemName);
 
                   final Map<String, dynamic> userData = {
                     "username": providerName,
@@ -131,7 +125,6 @@ class _FoodItemListScreenState extends State<FoodItemListScreen> {
                                   ),
                                   Row(
                                     children: [
-                                      // const Icon(IconlyBold.location),
                                       Text(address.toString()),
                                     ],
                                   ),

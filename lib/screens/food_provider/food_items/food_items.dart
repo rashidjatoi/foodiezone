@@ -39,7 +39,7 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                   .child(firebaseAuth.currentUser!.uid)
                   .child("food"),
               itemBuilder: (context, snapshot, animation, index) {
-                print(snapshot.value.toString());
+                debugPrint(snapshot.value.toString());
 
                 final price = snapshot.child('price').value;
 
