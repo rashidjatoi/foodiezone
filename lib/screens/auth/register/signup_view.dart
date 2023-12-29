@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/images.dart';
+import 'package:foodiezone/screens/auth/password_recovery/password_recovery.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:get/get.dart';
@@ -45,7 +46,7 @@ class _SignUpViewState extends State<SignUpView> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: const Text("Register"),
+        title: Text('register'.tr),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -81,8 +82,8 @@ class _SignUpViewState extends State<SignUpView> {
                       // Email
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                        labelText: "Email",
-                        hintText: "Enter your Email",
+                        labelText: 'email'.tr,
+                        hintText: 'emailEnter'.tr,
                         textEditingController: emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -95,8 +96,8 @@ class _SignUpViewState extends State<SignUpView> {
                       // Password
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                        labelText: "Password",
-                        hintText: "Enter your Password",
+                        labelText: 'password'.tr,
+                        hintText: 'passwordEnter'.tr,
                         textEditingController: passwordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -112,8 +113,10 @@ class _SignUpViewState extends State<SignUpView> {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  child: const Text("Forget Password"),
-                  onPressed: () {},
+                  child: Text('forgertPassword'.tr),
+                  onPressed: () {
+                    Get.to(() => const PasswordRecoveryView());
+                  },
                 ),
               ),
 
@@ -152,7 +155,7 @@ class _SignUpViewState extends State<SignUpView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an Account"),
+                  Text('AlreadyHaveAccount'.tr),
                   TextButton(
                     child: const Text("Sign in"),
                     onPressed: () {

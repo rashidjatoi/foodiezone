@@ -21,7 +21,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text('settings'.tr),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,11 +117,11 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
-                              "General Settings",
-                              style: TextStyle(
+                              'generalSetting'.tr,
+                              style: const TextStyle(
                                 fontFamily: "DMsans-Bold",
                                 fontSize: 15,
                               ),
@@ -131,7 +131,7 @@ class ProfileView extends StatelessWidget {
                           Column(
                             children: [
                               CustomListTile(
-                                tileText: "My Account",
+                                tileText: 'myAccount'.tr,
                                 tileIcon: IconlyLight.profile,
                                 ontap: () {
                                   Map<String, dynamic> userData = {
@@ -157,7 +157,7 @@ class ProfileView extends StatelessWidget {
                                             () => const FoodProviderAccount());
                                       }
                                     : null,
-                                title: const Text("Food Provider"),
+                                title: Text('foodProvider'.tr),
                                 trailing: const Icon(Icons.arrow_forward_ios),
                               ),
                               ListTile(
@@ -167,18 +167,18 @@ class ProfileView extends StatelessWidget {
                                         Get.to(() => const FoodDriverView());
                                       }
                                     : null,
-                                title: const Text("Food Driver"),
+                                title: Text('foodDrivier'.tr),
                                 trailing: const Icon(Icons.arrow_forward_ios),
                               ),
                               CustomListTile(
-                                tileText: "Help",
+                                tileText: 'help'.tr,
                                 tileIcon: IconlyLight.info_square,
                                 ontap: () {
                                   Get.to(() => const HelpDeskView());
                                 },
                               ),
                               CustomListTile(
-                                tileText: "Theme",
+                                tileText: 'theme'.tr,
                                 tileIcon: Icons.dark_mode_outlined,
                                 ontap: () {
                                   Get.to(() => const ChangeThemeScreen());
@@ -193,11 +193,11 @@ class ProfileView extends StatelessWidget {
                                         // Get.to(() => const HostelOwnerView());
                                       }
                                     : null,
-                                title: const Text("Switch Mode"),
+                                title: Text('SwitchMode'.tr),
                                 trailing: const Icon(Icons.arrow_forward_ios),
                               ),
                               CustomListTile(
-                                tileText: "Sign Out",
+                                tileText: 'SignOut'.tr,
                                 tileIcon: IconlyLight.logout,
                                 ontap: () {
                                   AuthServices.signOutUser().then((value) {

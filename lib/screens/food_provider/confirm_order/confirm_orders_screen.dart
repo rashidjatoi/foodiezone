@@ -69,7 +69,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 var foodItem =
                                     foodEntry.value as Map<dynamic, dynamic>;
 
-                                print(foodItem["currentUserId"]);
+                                // print(foodItem["currentUserId"]);
 
                                 return GestureDetector(
                                   onTap: () {

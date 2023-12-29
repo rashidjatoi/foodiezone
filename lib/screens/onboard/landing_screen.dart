@@ -102,6 +102,34 @@ class LandingScreen extends StatelessWidget {
                       child: Text('createaccount'.tr),
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Get.updateLocale(const Locale('en', 'US'));
+                        },
+                        child: const Text('English'),
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        width: 1, //
+                        height: 24,
+                        color: Colors.black,
+                        child: const VerticalDivider(
+                          width: 0,
+                          thickness: 1,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      TextButton(
+                        onPressed: () {
+                          Get.updateLocale(const Locale('ur', 'PK'));
+                        },
+                        child: const Text('Urdu'),
+                      ),
+                    ],
+                  ),
                   const Spacer(),
                 ],
               ),

@@ -72,8 +72,8 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    hintText: "Email",
-                    labelText: "Enter your Email",
+                    labelText: 'email'.tr,
+                    hintText: 'emailEnter'.tr,
                     textEditingController: emailController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -84,8 +84,8 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
-                    hintText: "Enter your Password",
-                    labelText: "Password",
+                    hintText: 'passwordEnter'.tr,
+                    labelText: 'pasword'.tr,
                     textEditingController: passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -100,14 +100,14 @@ class _LoginViewState extends State<LoginView> {
             Align(
               alignment: Alignment.topRight,
               child: TextButton(
-                child: const Text("Forget Password"),
+                child: Text('forgertPassword'.tr),
                 onPressed: () {
                   Get.to(() => const PasswordRecoveryView());
                 },
               ),
             ),
             CustomButton(
-              btnText: "Continue",
+              btnText: 'continue'.tr,
               loading: btnLoading,
               ontap: () {
                 if (formKey.currentState!.validate()) {
@@ -141,7 +141,7 @@ class _LoginViewState extends State<LoginView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an Account"),
+                Text('dontHaveAccount'.tr),
                 TextButton(
                   child: const Text("Sign up"),
                   onPressed: () {

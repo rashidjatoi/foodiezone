@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/auth_services.dart';
+import 'package:get/get.dart';
 
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_textformfield.dart';
@@ -32,7 +33,7 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: const Text("Password Recovery"),
+        title: Text('passwordRecovery'.tr),
         elevation: 0.8,
         centerTitle: true,
       ),
@@ -43,17 +44,17 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 50),
-              Align(
+              const Align(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  "assets/images/forgetpassword.png",
-                  height: 200,
+                child: Icon(
+                  Icons.lock,
+                  size: 40,
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                "Enter your email address or phone number to recover your password",
-                style: TextStyle(
+              Text(
+                'passwordSlogan'.tr,
+                style: const TextStyle(
                   fontFamily: "DMsans-Regular",
                   fontSize: 14,
                 ),
@@ -62,8 +63,8 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
               Form(
                 key: formKey,
                 child: CustomTextFormField(
-                  hintText: 'Email',
-                  label: 'Email',
+                  hintText: 'email'.tr,
+                  label: 'email'.tr,
                   icon: Icons.email_outlined,
                   textEditingController: emailController,
                   validator: (value) {
@@ -77,7 +78,7 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
               const SizedBox(height: 20),
               CustomButton(
                 btnMargin: 0,
-                btnText: "Send Link",
+                btnText: 'sendLink'.tr,
                 ontap: () {
                   if (formKey.currentState!.validate()) {
                     AuthServices.sendResetLink(

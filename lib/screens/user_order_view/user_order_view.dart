@@ -56,7 +56,7 @@ class _UserOrderViewState extends State<UserOrderView> {
                       final data = snapshot.data!.snapshot.value
                           as Map<dynamic, dynamic>;
 
-                      print(map[uid]['order']);
+                      // print(map[uid]['order']);
                       if (data.containsKey(uid) && data[uid]['order'] != null) {
                         final orderMap =
                             data[uid]['order'] as Map<dynamic, dynamic>;

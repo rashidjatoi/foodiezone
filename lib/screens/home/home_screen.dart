@@ -37,9 +37,9 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text(
-          "FoodieZone",
-          style: TextStyle(
+        title: Text(
+          'foodieZone'.tr,
+          style: const TextStyle(
             fontFamily: "DMSans Medium",
           ),
         ),
@@ -101,19 +101,19 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Food Providers",
-                  style: TextStyle(
+                  'foodProvider'.tr,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontFamily: "DMSans Bold",
                   ),
                 ),
                 Text(
-                  "See All",
-                  style: TextStyle(
+                  'seeAll'.tr,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontFamily: "DMSans Medium",
                     color: appcolor,
@@ -307,14 +307,14 @@ class _HomeViewState extends State<HomeView> {
           ),
           Card(
             child: ListTile(
-              title: const Text('Home'),
+              title: Text('home'.tr),
               leading: const Icon(IconlyBold.home),
               onTap: () {},
             ),
           ),
           Card(
             child: ListTile(
-              title: const Text('Orders'),
+              title: Text('Orders'.tr),
               leading: const Icon(IconlyBold.heart),
               onTap: () {
                 Get.to(() => const UserOrderView());
@@ -323,7 +323,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           Card(
             child: ListTile(
-              title: const Text('Chat'),
+              title: Text('Chat'.tr),
               leading: const Icon(IconlyBold.chat),
               onTap: () {
                 Get.to(() => const HelpDeskView());
@@ -332,7 +332,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           Card(
             child: ListTile(
-              title: const Text('Profile'),
+              title: Text('Profile'.tr),
               leading: const Icon(IconlyBold.profile),
               onTap: () {
                 Get.to(() => const ProfileView());
@@ -341,7 +341,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           Card(
             child: ListTile(
-              title: const Text('Sign Out'),
+              title: Text('SignOut'.tr),
               leading: const Icon(IconlyBold.logout),
               onTap: () {
                 AuthServices.signOutUser().then((value) {
@@ -352,65 +352,6 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-// Custom Header Widget
-class CustomHeaderWidget extends StatelessWidget {
-  const CustomHeaderWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/2.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            "Search Hostels in any \nlocation",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: "DMsans-Bold",
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-          // const SizedBox(height: 5),
-          CupertinoButton(
-            onPressed: () {},
-            child: Container(
-              width: 120,
-              height: 50,
-              // padding: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  "Find Hostels",
-                  style: TextStyle(
-                    fontFamily: "DMsans-Medium",
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );
