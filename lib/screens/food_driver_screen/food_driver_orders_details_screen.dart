@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/food_driver_screen/details_view_food_driver.dart';
+import 'package:foodiezone/screens/food_provider/order_details/foodprovider_order_details_screen.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -18,8 +19,6 @@ class FoodDriverOrdersDetailsScreen extends StatefulWidget {
 
 class _FoodDriverOrdersDetailsScreenState
     extends State<FoodDriverOrdersDetailsScreen> {
-  final ref = FirebaseDatabase.instance.ref('users');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,128 +26,86 @@ class _FoodDriverOrdersDetailsScreenState
         title: const Text("Orders Details"),
         centerTitle: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: FirebaseAnimatedList(
-                query: firebaseDatabase,
-                itemBuilder: (context, snapshot, animation, index) {
-                  if (snapshot.value != null) {
-                    final order = snapshot.child('order').value;
-                    final address = snapshot.child('address').value;
-                    final phone = snapshot.child('phone').value;
-                    final imageUrl = snapshot.child('imageUrl').value;
-                    final email = snapshot.child('email').value;
-                    final name = snapshot.child('username').value;
-                    final foodPrice =
-                        snapshot.child('order').child('foodPrice').value;
-                    // print(snapshot.child('order').value);
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder(
+              stream: orderDatabase.onValue,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  Map<dynamic, dynamic>? map =
+                      snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
 
-                    if (order != null) {
-                      final foodImage =
-                          snapshot.child('order').child('foodImage').value;
-                      final foodItemName =
-                          snapshot.child('order').child('foodItemName').value;
+                  // print(map);
 
-                      return CupertinoButton(
-                        onPressed: () {
-                          Map<String, dynamic> userOrderDetails = {
-                            "address": address,
-                            "phone": phone,
-                            "imageUrl": imageUrl,
-                            "email": email,
-                            "usernmae": name,
-                            "foodImage": foodImage,
-                            "foodItem": foodItemName,
-                            "foodPrice": foodPrice,
-                          };
-
-                          Get.to(
-                            () => FoodDriverUserOrderDetailsView(
-                              ordeDetails: userOrderDetails,
-                            ),
-                          );
-                        },
-                        padding: const EdgeInsets.all(0),
-                        child: Card(
-                          child: Container(
-                            height: 120,
-                            width: 400,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 40,
-                                        child: foodImage != null
-                                            ? ClipOval(
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      foodImage.toString(),
-                                                  fit: BoxFit.cover,
-                                                  width: 100,
-                                                  height: 100,
-                                                  placeholder: (context, url) =>
-                                                      const CircularProgressIndicator(),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          const Icon(
-                                                    IconlyBold.profile,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              )
-                                            : const Icon(
-                                                IconlyBold.profile,
-                                                color: Colors.white,
-                                              ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        foodItemName.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: "DMSans Bold",
-                                        ),
-                                      ),
-                                      // You can add more UI elements here
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return const Text('');
-                    }
-                  } else {
-                    return const Text('');
+                  if (map == null || map.isEmpty) {
+                    return const Center(
+                      child: Text('No data available'),
+                    );
                   }
-                },
-              ),
-            )
-          ],
-        ),
+                  List<dynamic> list = map.values.toList();
+
+                  return ListView.builder(
+                    itemCount: list.isEmpty ? 1 : list.length,
+                    itemBuilder: (context, index) {
+                      if (list.isEmpty) {
+                        return const Center(
+                          child: Text('No orders found'),
+                        );
+                      } else {
+                        var foodProvider = list[index];
+                        print(foodProvider);
+                        final foodPrice = foodProvider["foodPrice"];
+                        final foodDescription = foodProvider["foodDescription"];
+                        final foodItemName = foodProvider["foodItemName"];
+                        final currentUserId = foodProvider["currentUserId"];
+                        final foodImage = foodProvider["foodImage"];
+                        final userId = foodProvider["userId"];
+                        var foods = foodProvider['foodPrice'];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Map<String, dynamic> orderData = {
+                              "foodItemName": foodItemName,
+                              "foodPrice": foodPrice,
+                              "foodDescription": foodDescription,
+                              "uid": userId,
+                            };
+
+                            Get.to(
+                              () => FoodDriverUserOrderDetailsView(
+                                orderData: orderData,
+                              ),
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Image.network(
+                                  foodImage,
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(foodItemName),
+                                subtitle: Text(foodDescription),
+                                trailing: Text('\$${foodPrice}'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  );
+                }
+              },
+            ),
+          )
+        ],
       ),
     );
   }

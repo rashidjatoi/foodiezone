@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import '../../admin/user/widgets/custom_table_widget.dart';
@@ -16,8 +15,6 @@ class FoodProviderOrderDetailsScreen extends StatefulWidget {
 
 class _FoodProviderOrderDetailsScreenState
     extends State<FoodProviderOrderDetailsScreen> {
-  final ref = FirebaseDatabase.instance.ref('users');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

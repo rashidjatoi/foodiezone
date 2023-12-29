@@ -41,20 +41,20 @@ class _FoodDriverViewState extends State<FoodDriverView> {
               ),
             ],
           ),
-          Row(
-            children: [
-              FoodProviderViewButton(
-                ontap: () {},
-                icon: IconlyBold.profile,
-                iconText: "Pending Orders",
-              ),
-              FoodProviderViewButton(
-                ontap: () {},
-                icon: IconlyBold.profile,
-                iconText: "Confirm Orders",
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     FoodProviderViewButton(
+          //       ontap: () {},
+          //       icon: IconlyBold.profile,
+          //       iconText: "Pending Orders",
+          //     ),
+          //     FoodProviderViewButton(
+          //       ontap: () {},
+          //       icon: IconlyBold.profile,
+          //       iconText: "Confirm Orders",
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

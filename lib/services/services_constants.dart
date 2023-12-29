@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 final firebaseAuth = FirebaseAuth.instance;
 final user = firebaseAuth.currentUser;
 final firebaseDatabase = FirebaseDatabase.instance.ref('users');
+final orderDatabase = FirebaseDatabase.instance.ref('orders');
 final foodProviderDatabase = FirebaseDatabase.instance.ref('foodprovider');
 final foodDriverDatabase = FirebaseDatabase.instance.ref('fooddriver');
 
