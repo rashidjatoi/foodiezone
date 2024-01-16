@@ -162,7 +162,7 @@ class ProfileView extends StatelessWidget {
                               ),
                               ListTile(
                                 leading: const Icon(IconlyLight.profile),
-                                onTap: map[uid]['role'] == "foodProvider"
+                                onTap: map[uid]['role'] == "foodDrivier"
                                     ? () {
                                         Get.to(() => const FoodDriverView());
                                       }
@@ -183,18 +183,6 @@ class ProfileView extends StatelessWidget {
                                 ontap: () {
                                   Get.to(() => const ChangeThemeScreen());
                                 },
-                              ),
-                              ListTile(
-                                leading: const Icon(
-                                  Icons.change_circle_outlined,
-                                ),
-                                onTap: map[uid]['role'] == "hosteler"
-                                    ? () {
-                                        // Get.to(() => const HostelOwnerView());
-                                      }
-                                    : null,
-                                title: Text('SwitchMode'.tr),
-                                trailing: const Icon(Icons.arrow_forward_ios),
                               ),
                               CustomListTile(
                                 tileText: 'SignOut'.tr,

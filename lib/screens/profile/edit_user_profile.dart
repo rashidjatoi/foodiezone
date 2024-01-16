@@ -4,10 +4,12 @@ import 'package:foodiezone/services/database_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+
 import '../../widgets/custom_textformfield.dart';
 
 class EditUserProfile extends StatefulWidget {
-  const EditUserProfile({super.key});
+  final String userRole;
+  const EditUserProfile({super.key, this.userRole = 'user'});
 
   @override
   State<EditUserProfile> createState() => _EditUserProfileState();
@@ -211,6 +213,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             username: usernameController.text.toString(),
                             email: emailController.text.toString(),
                             date: dateController.text.toString(),
+                            role: widget.userRole.toString(),
                             address: addressController.text.toString(),
                             gender: gender.toString(),
                             phone: phoneController.text.toString(),

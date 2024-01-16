@@ -7,6 +7,7 @@ import 'package:foodiezone/provider/theme_change_provider.dart';
 import 'package:foodiezone/screens/splash_screen/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import 'firebase_options.dart';
 
 void main() async {

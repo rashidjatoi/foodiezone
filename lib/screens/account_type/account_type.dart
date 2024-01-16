@@ -4,6 +4,7 @@ import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/screens/profile/edit_user_profile.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+
 import '../rider/rider_account/rider_account.dart';
 
 class AccountTypeScreen extends StatefulWidget {
@@ -46,7 +47,9 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
                 selectedButtonIndex = 1;
               });
 
-              Get.offAll(() => const EditUserProfile());
+              Get.offAll(() => const EditUserProfile(
+                    userRole: 'foodDriver',
+                  ));
             },
           ),
           const SizedBox(height: 20),
@@ -72,7 +75,9 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
                 selectedButtonIndex = 2;
               });
 
-              Get.offAll(() => const EditUserProfile());
+              Get.offAll(() => const EditUserProfile(
+                    userRole: 'foodProvider',
+                  ));
             },
           ),
         ],
@@ -105,7 +110,10 @@ class CustomButtonForAccountType extends StatelessWidget {
         height: 150,
         width: double.infinity,
         decoration: BoxDecoration(
-          border: Border.all(color: isSelected ? appcolor : Colors.grey),
+          border: Border.all(
+            color: appcolor,
+            strokeAlign: BorderSide.strokeAlignInside,
+          ),
           borderRadius: BorderRadius.circular(25),
           color: isSelected ? appcolor : null,
         ),

@@ -12,6 +12,7 @@ class DatabaseServices {
     required String date,
     required String gender,
     required String cnic,
+    required String role,
     required String address,
   }) async {
     final user = firebaseAuth.currentUser;
@@ -25,7 +26,7 @@ class DatabaseServices {
         "date": date,
         "cninc": cnic,
         "gender": gender,
-        "role": "user",
+        "role": role,
         "Timestamp": DateTime.now().toString(),
       }).then((value) => Utils.showToast(
             message: 'Profile Updated',
