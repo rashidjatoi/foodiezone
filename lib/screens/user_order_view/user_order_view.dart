@@ -86,6 +86,7 @@ class _UserOrderViewState extends State<UserOrderView> {
                                     child: ClipOval(
                                       child: CachedNetworkImage(
                                         imageUrl: foodImage,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),

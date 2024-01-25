@@ -5,8 +5,6 @@ import 'package:foodiezone/screens/profile/edit_user_profile.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-import '../rider/rider_account/rider_account.dart';
-
 class AccountTypeScreen extends StatefulWidget {
   const AccountTypeScreen({super.key});
 
@@ -62,7 +60,9 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
                 selectedButtonIndex = 0;
               });
 
-              Get.offAll(() => const RiderAccountDetailsScreen());
+              Get.offAll(() => const EditUserProfile(
+                    userRole: 'foodRider',
+                  ));
             },
           ),
           const SizedBox(height: 20),

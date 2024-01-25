@@ -40,17 +40,25 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: searchController,
-              decoration: const InputDecoration(
-                hintText: 'Search Item',
-                border: OutlineInputBorder(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.grey),
               ),
-              onChanged: (value) {
-                setState(() {
-                  searchController.text = value.toString();
-                });
-              },
+              child: TextFormField(
+                controller: searchController,
+                decoration: const InputDecoration(
+                  hintText: 'Search Item',
+                  prefixIcon: Icon(IconlyLight.search),
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    searchController.text = value.toString();
+                  });
+                },
+              ),
             ),
           ),
           Expanded(
@@ -65,15 +73,21 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                     ),
                   );
                 } else {
-                  Map<dynamic, dynamic> map =
-                      snapshot.data!.snapshot.value as dynamic;
+                  Map<dynamic, dynamic>? map =
+                      snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+                  if (map == null) {
+                    return const SizedBox();
+                  }
 
                   List<dynamic> list = map.values.toList();
                   return ListView.builder(
                     itemCount: list.length,
                     itemBuilder: (context, index) {
                       var foodProvider = list[index];
-                      var foods = foodProvider['food'] as Map<dynamic, dynamic>;
+                      var foods = foodProvider.containsKey('food') &&
+                              foodProvider['food'] is Map<dynamic, dynamic>
+                          ? foodProvider['food'] as Map<dynamic, dynamic>
+                          : null;
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -85,7 +99,7 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: foods.length,
+                              itemCount: foods!.length,
                               itemBuilder: (context, foodIndex) {
                                 var foodItem = foods.values.toList()[foodIndex];
 
@@ -129,7 +143,7 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                                               imageUrl: foodItem['imageUrl']
                                                   .toString(),
                                               fit: BoxFit.cover,
-                                              height: 300,
+                                              height: 250,
                                               width: double.infinity,
                                               placeholder: (context, url) =>
                                                   const CircularProgressIndicator(),

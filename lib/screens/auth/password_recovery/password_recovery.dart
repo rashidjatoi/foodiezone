@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_textformfield.dart';
@@ -33,7 +34,7 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: Text('passwordRecovery'.tr),
+        title: Text('forgertPassword'.tr),
         elevation: 0.8,
         centerTitle: true,
       ),
@@ -47,8 +48,8 @@ class _PasswordRecoveryViewState extends State<PasswordRecoveryView> {
               const Align(
                 alignment: Alignment.center,
                 child: Icon(
-                  Icons.lock,
-                  size: 40,
+                  IconlyLight.lock,
+                  size: 140,
                 ),
               ),
               const SizedBox(height: 10),

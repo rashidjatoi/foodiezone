@@ -44,38 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC3F4iz0LXoEgFG5RWtgkvB9t27bH5GyAk',
-    appId: '1:1078507027664:web:f9c6cebf19e48f18d272d5',
-    messagingSenderId: '1078507027664',
-    projectId: 'foodiezone-21025',
-    authDomain: 'foodiezone-21025.firebaseapp.com',
-    storageBucket: 'foodiezone-21025.appspot.com',
-    measurementId: 'G-5ZC8005NM7',
+    apiKey: 'AIzaSyA_pLpbYcPKDTzIdxFUb44ysHktD0WjICg',
+    appId: '1:911002275314:web:42e4438ee3a94d72d02f6b',
+    messagingSenderId: '911002275314',
+    projectId: 'foodiezone-649ee',
+    authDomain: 'foodiezone-649ee.firebaseapp.com',
+    storageBucket: 'foodiezone-649ee.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAn4ivO2Q_xWigDFgrQm5cskDAY1GvZbsg',
-    appId: '1:1078507027664:android:b96463ae01df1117d272d5',
-    messagingSenderId: '1078507027664',
-    projectId: 'foodiezone-21025',
-    storageBucket: 'foodiezone-21025.appspot.com',
+    apiKey: 'AIzaSyDVTtG-6t6Ug9tgpEN37RIPG0Jwac93nq4',
+    appId: '1:911002275314:android:24efee50031add31d02f6b',
+    messagingSenderId: '911002275314',
+    projectId: 'foodiezone-649ee',
+    storageBucket: 'foodiezone-649ee.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCU5wawWGOB_HL_32Re3P1rZ7ya6VWp0dM',
-    appId: '1:1078507027664:ios:0f640c86980eb721d272d5',
-    messagingSenderId: '1078507027664',
-    projectId: 'foodiezone-21025',
-    storageBucket: 'foodiezone-21025.appspot.com',
+    apiKey: 'AIzaSyBGXGJe1KrSAEY9aFZqn50yZu8Gza_JA-w',
+    appId: '1:911002275314:ios:451b60ff0d3b0b22d02f6b',
+    messagingSenderId: '911002275314',
+    projectId: 'foodiezone-649ee',
+    storageBucket: 'foodiezone-649ee.appspot.com',
     iosBundleId: 'com.example.foodiezone',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCU5wawWGOB_HL_32Re3P1rZ7ya6VWp0dM',
-    appId: '1:1078507027664:ios:b6bbb9a82b0ef8f9d272d5',
-    messagingSenderId: '1078507027664',
-    projectId: 'foodiezone-21025',
-    storageBucket: 'foodiezone-21025.appspot.com',
+    apiKey: 'AIzaSyBGXGJe1KrSAEY9aFZqn50yZu8Gza_JA-w',
+    appId: '1:911002275314:ios:ff3bbac179f96239d02f6b',
+    messagingSenderId: '911002275314',
+    projectId: 'foodiezone-649ee',
+    storageBucket: 'foodiezone-649ee.appspot.com',
     iosBundleId: 'com.example.foodiezone.RunnerTests',
   );
 }

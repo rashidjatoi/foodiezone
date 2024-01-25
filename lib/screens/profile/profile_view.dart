@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../widgets/custom_list_tile.dart';
-import '../help/help_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -108,8 +107,13 @@ class ProfileView extends StatelessWidget {
                                       map[uid]['email'].toString(),
                                       style: const TextStyle(
                                         fontFamily: "DMsans-Medium",
+                                        fontSize: 12,
                                         color: Colors.grey,
+                                        overflow: TextOverflow.fade,
                                       ),
+                                      maxLines: 2,
+                                      softWrap: true,
+                                      overflow: TextOverflow.fade,
                                     ),
                                   ],
                                 )
@@ -162,7 +166,7 @@ class ProfileView extends StatelessWidget {
                               ),
                               ListTile(
                                 leading: const Icon(IconlyLight.profile),
-                                onTap: map[uid]['role'] == "foodDrivier"
+                                onTap: map[uid]['role'] == "foodRider"
                                     ? () {
                                         Get.to(() => const FoodDriverView());
                                       }
@@ -170,13 +174,13 @@ class ProfileView extends StatelessWidget {
                                 title: Text('foodDrivier'.tr),
                                 trailing: const Icon(Icons.arrow_forward_ios),
                               ),
-                              CustomListTile(
-                                tileText: 'help'.tr,
-                                tileIcon: IconlyLight.info_square,
-                                ontap: () {
-                                  Get.to(() => const HelpDeskView());
-                                },
-                              ),
+                              // CustomListTile(
+                              //   tileText: 'help'.tr,
+                              //   tileIcon: IconlyLight.info_square,
+                              //   ontap: () {
+                              //     Get.to(() => const HelpDeskView());
+                              //   },
+                              // ),
                               CustomListTile(
                                 tileText: 'theme'.tr,
                                 tileIcon: Icons.dark_mode_outlined,

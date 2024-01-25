@@ -1,19 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
-import 'package:foodiezone/screens/search_food/search_food_screen.dart';
-import 'package:foodiezone/screens/user_order_view/user_order_view.dart';
 import 'package:foodiezone/screens/food_provider_details_to_client/food_provider_details_to_client.dart';
 import 'package:foodiezone/screens/help/help_view.dart';
 import 'package:foodiezone/screens/profile/profile_view.dart';
+import 'package:foodiezone/screens/search_food/search_food_screen.dart';
+import 'package:foodiezone/screens/user_order_view/user_order_view.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconly/iconly.dart';
+
 import '../lanugage_screen/chage_language_screen.dart';
 
 class HomeView extends StatefulWidget {
@@ -299,6 +300,7 @@ class _HomeViewState extends State<HomeView> {
                     firebaseAuth.currentUser!.email.toString(),
                     style: const TextStyle(
                       color: Colors.white,
+                      fontSize: 13,
                     ),
                   ),
                 ],
