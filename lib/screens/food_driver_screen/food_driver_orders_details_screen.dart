@@ -52,12 +52,13 @@ class _FoodDriverOrdersDetailsScreenState
                         );
                       } else {
                         var foodProvider = list[index];
-                        // print(foodProvider);
                         final foodPrice = foodProvider["foodPrice"];
                         final foodDescription = foodProvider["foodDescription"];
                         final foodItemName = foodProvider["foodItemName"];
                         final foodImage = foodProvider["foodImage"];
                         final userId = foodProvider["userId"];
+                        final foodProviderUserId =
+                            foodProvider["currentUserId"];
 
                         return GestureDetector(
                           onTap: () {
@@ -66,6 +67,7 @@ class _FoodDriverOrdersDetailsScreenState
                               "foodPrice": foodPrice,
                               "foodDescription": foodDescription,
                               "uid": userId,
+                              "providerUserId": foodProviderUserId,
                             };
 
                             Get.to(
@@ -76,16 +78,26 @@ class _FoodDriverOrdersDetailsScreenState
                           },
                           child: Column(
                             children: [
-                              ListTile(
-                                leading: Image.network(
-                                  foodImage,
-                                  width: 50,
-                                  height: 50,
-                                  fit: BoxFit.cover,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  child: ListTile(
+                                    leading: ClipOval(
+                                      child: Image.network(
+                                        foodImage,
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(foodItemName),
+                                    subtitle: Text(
+                                      foodDescription,
+                                      maxLines: 1,
+                                    ),
+                                    trailing: Text('\$$foodPrice'),
+                                  ),
                                 ),
-                                title: Text(foodItemName),
-                                subtitle: Text(foodDescription),
-                                trailing: Text('\$$foodPrice'),
                               ),
                             ],
                           ),

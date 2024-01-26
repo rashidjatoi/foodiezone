@@ -2,7 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/admin/user/widgets/custom_table_widget.dart';
+import 'package:foodiezone/screens/food_driver_screen/food_driver_food_provider_screen.dart';
 import 'package:foodiezone/services/services_constants.dart';
+import 'package:foodiezone/utils/utils.dart';
+import 'package:foodiezone/widgets/custom_button.dart';
+import 'package:iconly/iconly.dart';
 
 class FoodDriverUserOrderDetailsView extends StatefulWidget {
   final Map<String, dynamic> orderData;
@@ -33,89 +37,141 @@ class _FoodDriverUserOrderDetailsViewState
               children: [
                 const SizedBox(height: 20),
                 StreamBuilder(
-                    stream: firebaseDatabase.onValue,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<DatabaseEvent> snapshot) {
-                      final user = widget.orderData["uid"].toString();
+                  stream: firebaseDatabase.onValue,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DatabaseEvent> snapshot) {
+                    final user = widget.orderData["uid"].toString();
 
-                      final uid = user;
+                    final uid = user;
 
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      Map<dynamic, dynamic> map =
+                          snapshot.data!.snapshot.value as dynamic;
+
+                      final image = map[uid]?["imageUrl"];
+
+                      List<dynamic> list = [];
+                      list.clear();
+                      list = map.values.toList();
+
+                      return Column(
+                        children: [
+                          image != null && image.isNotEmpty
+                              ? ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: image,
+                                    height: 100,
+                                  ),
+                                )
+                              : const ClipOval(
+                                  child: CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.black,
+                                    child: Icon(
+                                      IconlyLight.profile,
+                                      size: 40,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                          const SizedBox(height: 15),
+                          Table(
+                            border: TableBorder.all(
+                              color: Colors.grey.shade300,
+                            ),
                             children: [
-                              CircularProgressIndicator(
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
+                              customTableWidget(
+                                headingText: "Client Name",
+                                dataText: map[uid]['username'].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Email",
+                                dataText: map[uid]['email'].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Gender",
+                                dataText: map[uid]['gender'].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Phone",
+                                dataText: map[uid]['phone'].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Order",
+                                dataText:
+                                    widget.orderData["foodItemName"].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Price",
+                                dataText:
+                                    widget.orderData["foodPrice"].toString(),
+                              ),
+                              customTableWidget(
+                                headingText: "Address",
+                                dataText: map[uid]['address'].toString(),
                               ),
                             ],
                           ),
-                        );
-                      } else {
-                        Map<dynamic, dynamic> map =
-                            snapshot.data!.snapshot.value as dynamic;
+                        ],
+                      );
+                    }
+                  },
+                ),
+                const SizedBox(height: 20),
+                CustomButton(
+                  btnText: 'Food Provider Details',
+                  btnRadius: 6,
+                  ontap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FoodDriverFoodPrviderScreen(
+                          userId: widget.orderData["providerUserId"].toString(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 10),
+                CustomButton(
+                  btnText: 'Pick Order',
+                  btnRadius: 6,
+                  btnColor: Colors.green,
+                  ontap: () async {
+                    final String driverUserId = firebaseAuth.currentUser!.uid;
+                    final String driverUserEmail =
+                        firebaseAuth.currentUser!.email.toString();
 
-                        final image = map[uid]?["imageUrl"];
-
-                        // print(map);
-                        List<dynamic> list = [];
-                        list.clear();
-                        list = map.values.toList();
-
-                        return Column(
-                          children: [
-                            ClipOval(
-                              child: CachedNetworkImage(
-                                imageUrl: image,
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            Table(
-                              border: TableBorder.all(
-                                color: Colors.grey.shade300,
-                              ),
-                              children: [
-                                customTableWidget(
-                                  headingText: "Client Name",
-                                  dataText: map[uid]['username'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Email",
-                                  dataText: map[uid]['email'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Gender",
-                                  dataText: map[uid]['gender'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Phone",
-                                  dataText: map[uid]['phone'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Order",
-                                  dataText: widget.orderData["foodItemName"]
-                                      .toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Price",
-                                  dataText:
-                                      widget.orderData["foodPrice"].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Address",
-                                  dataText: map[uid]['address'].toString(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      }
-                    }),
+                    await firebaseDatabase
+                        .child(uid.toString())
+                        .child('driver')
+                        .set(
+                      {
+                        "uid": driverUserId.toString(),
+                        "email": driverUserEmail.toString(),
+                      },
+                    ).then((value) => Utils.showToast(
+                              message: 'Order Placed',
+                              bgColor: Colors.green,
+                              textColor: Colors.white,
+                            ));
+                  },
+                )
               ],
             ),
           ],

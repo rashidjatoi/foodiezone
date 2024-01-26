@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,40 +69,44 @@ class _HomeViewState extends State<HomeView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: ListView.builder(
-                itemCount: imagesPath.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 200,
-                    width: 360,
-                    margin: const EdgeInsets.only(right: 8),
-                    decoration: BoxDecoration(
-                      color: appcolor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          imagesPath[index].toString(),
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            // SizedBox(
+            //   height: 200,
+            //   width: double.infinity,
+            //   child: ListView.builder(
+            //     itemCount: imagesPath.length,
+            //     scrollDirection: Axis.horizontal,
+
+            //     itemBuilder: (context, index) {
+            //       return Container(
+            //         height: 200,
+            //         width: 360,
+            //         margin: const EdgeInsets.only(right: 8),
+            //         decoration: BoxDecoration(
+            //           color: appcolor.withOpacity(0.1),
+            //           borderRadius: BorderRadius.circular(8),
+            //           image: DecorationImage(
+            //             image: AssetImage(
+            //               imagesPath[index].toString(),
+            //             ),
+            //             fit: BoxFit.cover,
+            //           ),
+            //         ),
+            //         child: const Center(
+            //           child: Text(
+            //             "",
+            //             style: TextStyle(
+            //               fontSize: 30,
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
+
+            const AutoScrollableListView(),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -355,6 +360,65 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AutoScrollableListView extends StatefulWidget {
+  const AutoScrollableListView({super.key});
+
+  @override
+  State<AutoScrollableListView> createState() => _AutoScrollableListViewState();
+}
+
+class _AutoScrollableListViewState extends State<AutoScrollableListView> {
+  List<String> imagesPath = [
+    "assets/images/real/apple_pie.jpg",
+    "assets/images/real/bakery.jpg",
+    "assets/images/real/breakfast.jpg",
+    "assets/images/real/coffee.jpg",
+    "assets/images/real/hamburger3.jpg",
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      width: double.infinity,
+      child: CarouselSlider.builder(
+        itemCount: imagesPath.length,
+        options: CarouselOptions(
+          height: 200,
+          viewportFraction: 1.0,
+          autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 4),
+          autoPlayAnimationDuration: const Duration(milliseconds: 500),
+          autoPlayCurve: Curves.easeInOut,
+        ),
+        itemBuilder: (context, index, realIndex) {
+          return Container(
+            height: 200,
+            width: 360,
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              color: appcolor.withOpacity(0.11),
+              borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(
+                image: AssetImage(imagesPath[index].toString()),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: const Center(
+              child: Text(
+                "",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

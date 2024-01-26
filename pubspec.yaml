@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.3.0
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.11.1
   firebase_core: ^2.19.0
@@ -45,9 +46,6 @@ dependencies:
   provider: ^6.0.5
   scrollable_list_tabview: null
   shadow_clip: ^0.0.1
-  # shared_preferences: ^2.2.2
-  # flutter_localization: ^0.1.14
-  # sdk: flutter
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -106,6 +104,5 @@ flutter:
     - family: DMSans Italic
       fonts:
         - asset: assets/fonts/DMSans-Italic.ttf
-
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

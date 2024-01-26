@@ -152,6 +152,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       hintText: 'Phone Number',
                       label: 'Phone Number',
                       icon: IconlyLight.call,
+                      keyboardType: TextInputType.number,
                       textEditingController: phoneController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -178,6 +179,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       hintText: 'CNIC',
                       label: 'CNIC',
                       icon: Icons.credit_card,
+                      keyboardType: TextInputType.number,
                       textEditingController: cnincController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -197,17 +199,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                           setState(() {
                             btnLoading = true;
                           });
-
-                          // UserModel userModel = UserModel(
-                          //   username: usernameController.text.toString(),
-                          //   email: emailController.text.toString(),
-                          //   dateofbith: dateController.text.toString(),
-                          //   address: addressController.text.toString(),
-                          //   gender: gender.toString(),
-                          //   phone: phoneController.text.toString(),
-                          //   cninc: cnincController.text.toString(),
-                          //   userId: currentUser.toString(),
-                          // );
 
                           DatabaseServices.saveUserCredentials(
                             username: usernameController.text.toString(),

@@ -19,18 +19,6 @@ class AuthServices {
               textColor: Colors.white,
             ),
           );
-
-      // if (userCredential.user != null) {
-      //   final user = firebaseAuth.currentUser;
-
-      //   await firebaseDatabase.child(user!.uid).set({
-      //     "username": username,
-      //     "userId": user.uid,
-      //     "email": email,
-      //     "role": "user",
-      //     "Timestamp": DateTime.now().toString(),
-      //   });
-      // }
     } on FirebaseAuthException catch (e) {
       Utils.showToast(
         message: e.toString(),

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../widgets/custom_list_tile.dart';
+import '../order_details_user/order_details_user_delivery.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -186,6 +187,15 @@ class ProfileView extends StatelessWidget {
                                 tileIcon: Icons.dark_mode_outlined,
                                 ontap: () {
                                   Get.to(() => const ChangeThemeScreen());
+                                },
+                              ),
+
+                              CustomListTile(
+                                tileText: 'Delivery',
+                                tileIcon: Icons.delivery_dining,
+                                ontap: () {
+                                  Get.to(
+                                      () => const OrderDetailsUserDelivery());
                                 },
                               ),
                               CustomListTile(

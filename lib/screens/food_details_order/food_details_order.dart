@@ -16,7 +16,7 @@ class FoodDetailsOrderView extends StatefulWidget {
 }
 
 class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
-  int itemCount = 1; // Initial item count
+  int itemCount = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,8 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
                 ),
                 child: CachedNetworkImage(
                   imageUrl: widget.foodDetails['foodImage'],
@@ -69,9 +69,9 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
                       widget.foodDetails['foodItemName'],
                       style: const TextStyle(
                         fontSize: 16,
-                        // fontFamily: "DMSans Medium",
                       ),
                     ),
+                    const Divider(),
                     const SizedBox(height: 5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,10 +87,10 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
                           widget.foodDetails['foodDescription'],
                           style: const TextStyle(
                             fontSize: 16,
-                            // fontFamily: "DMSans Medium",
                           ),
                         ),
                         const SizedBox(height: 10),
+                        const Divider(),
                         const Text(
                           'Price',
                           style: TextStyle(
@@ -105,7 +105,6 @@ class _FoodDetailsOrderViewState extends State<FoodDetailsOrderView> {
                               "\$${widget.foodDetails['foodPrice']}",
                               style: const TextStyle(
                                 fontSize: 18,
-                                // fontWeight: FontWeight.bold,
                               ),
                             ),
                             Row(

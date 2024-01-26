@@ -53,10 +53,11 @@ class _FoodProviderDetailsToClientViewState
                         width: 100,
                         height: 100,
                         placeholder: (context, url) =>
-                            const CircularProgressIndicator(), // Placeholder while loading
+                            const CircularProgressIndicator(),
                         errorWidget: (context, url, error) => const Icon(
-                            IconlyBold.profile,
-                            color: Colors.white), // Error widget
+                          IconlyBold.profile,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 40),
@@ -177,7 +178,7 @@ class _FoodProviderDetailsToClientViewState
                                   Text(
                                     truncateText(
                                       foodDescription.toString(),
-                                      5,
+                                      4,
                                     ),
                                   ),
                                   Text(

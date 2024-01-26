@@ -32,7 +32,6 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
             style: TextStyle(
               fontSize: 20,
               fontFamily: "DMSans Medium",
-              // fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 20),
@@ -44,10 +43,7 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
               setState(() {
                 selectedButtonIndex = 1;
               });
-
-              Get.offAll(() => const EditUserProfile(
-                    userRole: 'foodDriver',
-                  ));
+              Get.offAll(() => const EditUserProfile());
             },
           ),
           const SizedBox(height: 20),
