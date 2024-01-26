@@ -17,7 +17,7 @@ class _UserOrderViewState extends State<UserOrderView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders"),
+        title: const Text("My Orders"),
         centerTitle: false,
       ),
       body: Column(
@@ -81,17 +81,24 @@ class _UserOrderViewState extends State<UserOrderView> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Card(
+                                color: Colors.white,
                                 child: ListTile(
                                   leading: CircleAvatar(
                                     child: ClipOval(
                                       child: CachedNetworkImage(
                                         imageUrl: foodImage,
-                                        fit: BoxFit.contain,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),
                                   title: Text(foodItemName),
-                                  subtitle: Text(foodDesc),
+                                  subtitle: Text(
+                                    foodDesc,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                   trailing: Text(
                                     "\$ $price",
                                     style: const TextStyle(

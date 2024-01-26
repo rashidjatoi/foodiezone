@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
-import 'package:foodiezone/screens/food_driver_screen/food_provider_screen.dart';
 import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
 import 'package:foodiezone/screens/profile/profile_details_view.dart';
 import 'package:foodiezone/screens/theme/change_theme_view.dart';
@@ -12,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../widgets/custom_list_tile.dart';
+import '../food_driver_screen/food_driver_orders_details_screen.dart';
 import '../order_details_user/order_details_user_delivery.dart';
 
 class ProfileView extends StatelessWidget {
@@ -169,19 +169,13 @@ class ProfileView extends StatelessWidget {
                                 leading: const Icon(IconlyLight.profile),
                                 onTap: map[uid]['role'] == "foodRider"
                                     ? () {
-                                        Get.to(() => const FoodDriverView());
+                                        Get.to(() =>
+                                            const FoodDriverOrdersDetailsScreen());
                                       }
                                     : null,
                                 title: Text('foodDrivier'.tr),
                                 trailing: const Icon(Icons.arrow_forward_ios),
                               ),
-                              // CustomListTile(
-                              //   tileText: 'help'.tr,
-                              //   tileIcon: IconlyLight.info_square,
-                              //   ontap: () {
-                              //     Get.to(() => const HelpDeskView());
-                              //   },
-                              // ),
                               CustomListTile(
                                 tileText: 'theme'.tr,
                                 tileIcon: Icons.dark_mode_outlined,
@@ -189,9 +183,8 @@ class ProfileView extends StatelessWidget {
                                   Get.to(() => const ChangeThemeScreen());
                                 },
                               ),
-
                               CustomListTile(
-                                tileText: 'Delivery',
+                                tileText: 'Delivery Details',
                                 tileIcon: Icons.delivery_dining,
                                 ontap: () {
                                   Get.to(

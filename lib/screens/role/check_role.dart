@@ -3,7 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/admin/admin_view.dart';
 import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
-import 'package:foodiezone/screens/home/home_screen.dart';
 
 class RoleCheckScreen extends StatelessWidget {
   const RoleCheckScreen({super.key});
@@ -34,10 +33,10 @@ class RoleCheckScreen extends StatelessWidget {
             return const AdminView();
           } else if (role == 'user') {
             // Navigate to admin panel
-            return const HomeView();
+            return const BottomNavigationBarView();
           } else if (role == 'user') {
             // Navigate to home screen
-            return const HomeView();
+            return const BottomNavigationBarView();
           }
         }
 

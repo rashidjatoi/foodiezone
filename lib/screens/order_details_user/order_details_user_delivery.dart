@@ -28,24 +28,46 @@ class _OrderDetailsUserDeliveryState extends State<OrderDetailsUserDelivery> {
               if (snapshot.hasData) {
                 Map<dynamic, dynamic>? map =
                     snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
-                if (map!['driver']['email'] != null) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: ListTile(
-                        onTap: () {
-                          Get.to(() => DeliveryDriverDetailsForUser(
-                              deliveryDriverId:
-                                  map['driver']['uid'].toString()));
-                        },
-                        leading: const Icon(IconlyLight.profile),
-                        title: Text(map['driver']['email'].toString()),
+                if (map!['driver'] != null) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        child: ListTile(
+                          onTap: () {
+                            Get.to(() => DeliveryDriverDetailsForUser(
+                                deliveryDriverId:
+                                    map['driver']['uid'].toString()));
+                          },
+                          leading: const CircleAvatar(
+                              child: Icon(IconlyLight.profile)),
+                          title: Text(map['driver']['email'].toString()),
+                          subtitle: const Text(
+                            'Click to see details',
+                            style: TextStyle(
+                              color: Colors.black38,
+                            ),
+                          ),
+                          trailing: const Icon(
+                            IconlyLight.arrow_right,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                     ),
                   );
                 }
 
-                return const Text('No delivery accepted yet');
+                return Column(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Adjust as needed
+                  children: [
+                    Center(
+                      child: Text('Order Pending'),
+                    ),
+                  ],
+                );
               }
 
               return const Text('No delivery accepted yet');

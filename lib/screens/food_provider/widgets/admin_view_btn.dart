@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class FoodProviderViewButton extends StatelessWidget {
   final IconData icon;
@@ -55,7 +55,7 @@ class FoodProviderViewButton extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 40, color: finalIconColor, // Use the final icon color
+                size: 40, color: iconColor, // Use the final icon color
               ),
               const SizedBox(height: 15),
               Text(

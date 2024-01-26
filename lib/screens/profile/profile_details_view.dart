@@ -1,14 +1,15 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:foodiezone/widgets/custom_textformfield.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../services/services_constants.dart';
 
 class ProfileDetailsView extends StatefulWidget {
@@ -191,11 +192,6 @@ class _ProfileDetailsViewState extends State<ProfileDetailsView> {
                         Future.value(uploadTask).then((value) async {
                           var newUrl = await ref.getDownloadURL();
 
-                          foodProviderDatabase
-                              .child(widget.userData['uid'])
-                              .update({
-                            'imageUrl': newUrl,
-                          });
                           firebaseDatabase.child(widget.userData['uid']).update(
                             {
                               'imageUrl': newUrl,

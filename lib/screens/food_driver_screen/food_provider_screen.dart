@@ -5,6 +5,8 @@ import 'package:foodiezone/screens/food_provider/widgets/admin_view_btn.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
+import '../../constants/colors.dart';
+
 class FoodDriverView extends StatefulWidget {
   const FoodDriverView({super.key});
 
@@ -30,6 +32,7 @@ class _FoodDriverViewState extends State<FoodDriverView> {
                   Get.to(() => const FoodDriverAccountDetailsView());
                 },
                 icon: IconlyBold.profile,
+                iconColor: appcolor,
                 iconText: "Create Profile",
               ),
               FoodProviderViewButton(

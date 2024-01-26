@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -41,75 +41,15 @@ class _FoodProviderDetailsToClientViewState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              child: SizedBox(
-                height: 140,
-                child: Row(
-                  children: [
-                    ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: widget.userData['userImage'],
-                        fit: BoxFit.cover,
-                        width: 100,
-                        height: 100,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => const Icon(
-                          IconlyBold.profile,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 40),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.userData['username'],
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontFamily: "DMSans Bold",
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(widget.userData['address']),
-                            Text(widget.userData['phone']),
-                          ],
-                        ),
-                        RatingBar.builder(
-                          initialRating: 3,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemSize: 20,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 0.0),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: Colors.black,
-                            size: 4,
-                          ),
-                          onRatingUpdate: (rating) {
-                            debugPrint(rating.toString());
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const SizedBox(height: 5),
             const Text(
-              "Popular",
+              "Food Items",
               style: TextStyle(
                 fontSize: 18,
-                fontFamily: "DMSans Bold",
+                fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 10),
             Expanded(
               child: FirebaseAnimatedList(
                 query: foodProviderDatabase
@@ -127,72 +67,99 @@ class _FoodProviderDetailsToClientViewState
 
                   final foodItemName = snapshot.child("fooditemname").value;
 
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    child: InkWell(
-                      onTap: () {
-                        Map<String, dynamic> foodDetails = {
-                          "foodPrice": price,
-                          "foodImage": foodImage,
-                          "foodDescription": foodDescription,
-                          "foodItemName": foodItemName,
-                          "userId": userId,
-                        };
+                  return Card(
+                    color: Colors.white,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () {
+                          Map<String, dynamic> foodDetails = {
+                            "foodPrice": price,
+                            "foodImage": foodImage,
+                            "foodDescription": foodDescription,
+                            "foodItemName": foodItemName,
+                            "userId": userId,
+                          };
 
-                        Get.to(() => FoodDetailsOrderView(
-                              foodDetails: foodDetails,
-                            ));
-                      },
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: CachedNetworkImage(
-                              imageUrl: foodImage.toString(),
-                              fit: BoxFit.cover,
-                              width: 100,
-                              height: 100,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) => const Icon(
-                                IconlyBold.profile,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 40),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                foodItemName.toString(),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: "DMSans Bold",
+                          Get.to(() => FoodDetailsOrderView(
+                                foodDetails: foodDetails,
+                              ));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: foodImage.toString(),
+                                    fit: BoxFit.cover,
+                                    width: 80,
+                                    height: 80,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                      IconlyBold.profile,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    truncateText(
-                                      foodDescription.toString(),
-                                      4,
+                                const SizedBox(width: 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          foodItemName.toString(),
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: "DMSans Bold",
+                                          ),
+                                        ),
+                                        Text(
+                                          truncateText(
+                                            foodDescription.toString(),
+                                            4,
+                                          ),
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                        ),
+                                      ],
                                     ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "\$$price ",
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: appcolor,
                                   ),
-                                  Text(
-                                    "\$$price ",
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                ),
+                                const SizedBox(height: 5),
+                                const CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: appcolor,
+                                  child: Icon(
+                                    IconlyLight.heart,
+                                    color: Colors.white,
                                   ),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

@@ -26,14 +26,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<String> imagesPath = [
-    "assets/images/real/apple_pie.jpg",
-    "assets/images/real/bakery.jpg",
-    "assets/images/real/breakfast.jpg",
-    "assets/images/real/coffee.jpg",
-    "assets/images/real/hamburger3.jpg",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,63 +61,29 @@ class _HomeViewState extends State<HomeView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            // SizedBox(
-            //   height: 200,
-            //   width: double.infinity,
-            //   child: ListView.builder(
-            //     itemCount: imagesPath.length,
-            //     scrollDirection: Axis.horizontal,
-
-            //     itemBuilder: (context, index) {
-            //       return Container(
-            //         height: 200,
-            //         width: 360,
-            //         margin: const EdgeInsets.only(right: 8),
-            //         decoration: BoxDecoration(
-            //           color: appcolor.withOpacity(0.1),
-            //           borderRadius: BorderRadius.circular(8),
-            //           image: DecorationImage(
-            //             image: AssetImage(
-            //               imagesPath[index].toString(),
-            //             ),
-            //             fit: BoxFit.cover,
-            //           ),
-            //         ),
-            //         child: const Center(
-            //           child: Text(
-            //             "",
-            //             style: TextStyle(
-            //               fontSize: 30,
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
-
             const AutoScrollableListView(),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'foodProvider'.tr,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: "DMSans Bold",
+            const SizedBox(height: 2),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'foodProvider'.tr,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontFamily: "DMSans Bold",
+                    ),
                   ),
-                ),
-                Text(
-                  'seeAll'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontFamily: "DMSans Medium",
-                    color: appcolor,
+                  Text(
+                    'seeAll'.tr,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: appcolor,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Expanded(
               child: FirebaseAnimatedList(
@@ -202,13 +160,12 @@ class _HomeViewState extends State<HomeView> {
                                                 width: 100,
                                                 height: 100,
                                                 placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(), // Placeholder while loading
+                                                    const CircularProgressIndicator(),
                                                 errorWidget: (context, url,
                                                         error) =>
                                                     const Icon(
                                                         IconlyBold.profile,
-                                                        color: Colors
-                                                            .white), // Error widget
+                                                        color: Colors.white),
                                               ),
                                             )
                                           : const Icon(
@@ -232,7 +189,6 @@ class _HomeViewState extends State<HomeView> {
                                     ),
                                     Row(
                                       children: [
-                                        // const Icon(IconlyBold.location),
                                         Text(address.toString()),
                                       ],
                                     ),
@@ -393,7 +349,7 @@ class _AutoScrollableListViewState extends State<AutoScrollableListView> {
           autoPlay: true,
           autoPlayInterval: const Duration(seconds: 4),
           autoPlayAnimationDuration: const Duration(milliseconds: 500),
-          autoPlayCurve: Curves.easeInOut,
+          autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
         ),
         itemBuilder: (context, index, realIndex) {
           return Container(

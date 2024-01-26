@@ -163,7 +163,7 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                                                 Row(
                                                   children: [
                                                     const Text(
-                                                      'Username: ',
+                                                      'Food Provider: ',
                                                       style: TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
@@ -188,21 +188,6 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                                                     ),
                                                     Text(foodItem[
                                                         'fooditemname']),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      'Price: ',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily:
-                                                              "DMSans Medium"),
-                                                    ),
-                                                    Text(foodItem[
-                                                        'description']),
                                                   ],
                                                 ),
                                                 Row(
