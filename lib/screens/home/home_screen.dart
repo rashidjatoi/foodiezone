@@ -24,6 +24,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  String truncateText(String text, int maxWords) {
+    List<String> words = text.split(' ');
+    if (words.length > maxWords) {
+      words = words.sublist(0, maxWords);
+      return '${words.join(' ')}...';
+    }
+    return text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,28 +206,11 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                         Row(
                                           children: [
-                                            Text(address.toString()),
+                                            Text(truncateText(
+                                                address.toString(), 4)),
                                           ],
                                         ),
                                         Text(phone.toString()),
-                                        // RatingBar.builder(
-                                        //   initialRating: 3,
-                                        //   minRating: 1,
-                                        //   direction: Axis.horizontal,
-                                        //   allowHalfRating: true,
-                                        //   itemCount: 5,
-                                        //   itemSize: 20,
-                                        //   itemPadding: const EdgeInsets.symmetric(
-                                        //       horizontal: 0.0),
-                                        //   itemBuilder: (context, _) => const Icon(
-                                        //     Icons.star,
-                                        //     color: Colors.black,
-                                        //     size: 4,
-                                        //   ),
-                                        //   onRatingUpdate: (rating) {
-                                        //     debugPrint(rating.toString());
-                                        //   },
-                                        // ),
                                       ],
                                     )
                                   ],

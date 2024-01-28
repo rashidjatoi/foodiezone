@@ -55,63 +55,78 @@ class _FoodDriverOrdersDetailsScreenState
                         final foodItemName = foodProvider["foodItemName"];
                         final foodImage = foodProvider["foodImage"];
                         final userId = foodProvider["userId"];
+                        final orderKey = foodProvider["order"];
                         final foodProviderUserId =
                             foodProvider["currentUserId"];
+                        if (orderKey == true) {
+                          return GestureDetector(
+                            onTap: () {
+                              Map<String, dynamic> orderData = {
+                                "foodItemName": foodItemName,
+                                "foodPrice": foodPrice,
+                                "foodDescription": foodDescription,
+                                "uid": userId,
+                                "providerUserId": foodProviderUserId,
+                              };
 
-                        return GestureDetector(
-                          onTap: () {
-                            Map<String, dynamic> orderData = {
-                              "foodItemName": foodItemName,
-                              "foodPrice": foodPrice,
-                              "foodDescription": foodDescription,
-                              "uid": userId,
-                              "providerUserId": foodProviderUserId,
-                            };
-
-                            Get.to(
-                              () => FoodDriverUserOrderDetailsView(
-                                orderData: orderData,
-                              ),
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      color: Colors.grey.shade300,
-                                    ),
-                                  ),
-                                  child: ListTile(
-                                    leading: ClipOval(
-                                      child: Image.network(
-                                        foodImage,
-                                        width: 50,
-                                        height: 50,
-                                        fit: BoxFit.cover,
+                              Get.to(
+                                () => FoodDriverUserOrderDetailsView(
+                                  orderData: orderData,
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: Colors.grey.shade300,
                                       ),
                                     ),
-                                    title: Text(foodItemName),
-                                    subtitle: Text(
-                                      foodDescription,
-                                      maxLines: 1,
-                                    ),
-                                    trailing: Text(
-                                      'Rs: $foodPrice',
-                                      style: const TextStyle(
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
+                                    child: ListTile(
+                                      leading: ClipOval(
+                                        child: Image.network(
+                                          foodImage,
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      title: Text(foodItemName),
+                                      subtitle: Text(
+                                        foodDescription,
+                                        maxLines: 1,
+                                      ),
+                                      trailing: Text(
+                                        'Rs: $foodPrice',
+                                        style: const TextStyle(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Padding(
+                            padding: EdgeInsets.only(top: 300),
+                            child: Center(
+                              child: Text(
+                                'No Orders',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'DMSans Medium',
+                                ),
                               ),
-                            ],
-                          ),
-                        );
+                            ),
+                          );
+                        }
                       }
                     },
                   );

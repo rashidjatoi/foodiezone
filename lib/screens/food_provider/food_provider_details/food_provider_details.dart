@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/constants/colors.dart';
@@ -9,8 +9,9 @@ import 'package:foodiezone/services/database_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import '../../../widgets/custom_textformfield.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../widgets/custom_textformfield.dart';
 
 class FoodProviderDetailsView extends StatefulWidget {
   const FoodProviderDetailsView({super.key});
@@ -79,10 +80,6 @@ class _FoodProviderDetailsViewState extends State<FoodProviderDetailsView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 15),
-              // Image.asset(
-              //   "assets/images/images/rider.png",
-              //   height: 200,
-              // ),
               const SizedBox(height: 15),
               CupertinoButton(
                 padding: const EdgeInsets.all(0),

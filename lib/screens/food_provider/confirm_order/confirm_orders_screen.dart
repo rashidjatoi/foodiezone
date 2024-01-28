@@ -79,6 +79,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                             foodItem['foodItemName'],
                                         "foodPrice": foodItem['foodPrice'],
                                         "uid": foodItem["currentUserId"],
+                                        "key": foodEntry.key,
                                       };
 
                                       Get.to(

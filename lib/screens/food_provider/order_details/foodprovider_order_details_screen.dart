@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/services_constants.dart';
+import 'package:foodiezone/utils/utils.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../constants/colors.dart';
 import '../../admin/user/widgets/custom_table_widget.dart';
 
 class FoodProviderOrderDetailsScreen extends StatefulWidget {
@@ -135,6 +137,29 @@ class _FoodProviderOrderDetailsScreenState
                                 btnMargin: 0,
                                 ontap: () {
                                   openWhatsApp(map[uid]['phone'].toString());
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: CustomButton(
+                                btnText: 'Confirm Order',
+                                btnColor: appcolor,
+                                btnMargin: 0,
+                                ontap: () async {
+                                  await orderDatabase
+                                      .child(widget.orderData['key'].toString())
+                                      .update({
+                                    "order": true,
+                                  });
+
+                                  Utils.showToast(
+                                    message: 'Order Confirmed',
+                                    bgColor: Colors.green,
+                                    textColor: Colors.white,
+                                  );
                                 },
                               ),
                             )

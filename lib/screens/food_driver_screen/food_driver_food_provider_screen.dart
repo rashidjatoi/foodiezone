@@ -42,7 +42,6 @@ class _FoodDriverFoodPrviderScreenState
                   foodProviderDatabase.child(widget.userId.toString()).onValue,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print(snapshot.data!.snapshot.value);
                   Map<dynamic, dynamic> map =
                       snapshot.data!.snapshot.value as dynamic;
 

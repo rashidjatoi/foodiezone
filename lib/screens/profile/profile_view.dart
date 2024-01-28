@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../widgets/custom_list_tile.dart';
-import '../food_driver_screen/food_driver_orders_details_screen.dart';
 import '../order_details_user/order_details_user_delivery.dart';
 
 class ProfileView extends StatelessWidget {
@@ -172,29 +171,29 @@ class ProfileView extends StatelessWidget {
                               //   title: Text('foodProvider'.tr),
                               //   trailing: const Icon(Icons.arrow_forward_ios),
                               // ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      color: Colors.grey.shade300,
-                                    ),
-                                  ),
-                                  child: ListTile(
-                                    leading: const Icon(IconlyLight.profile),
-                                    onTap: map[uid]['role'] == "foodRider"
-                                        ? () {
-                                            Get.to(() =>
-                                                const FoodDriverOrdersDetailsScreen());
-                                          }
-                                        : null,
-                                    title: Text('foodDrivier'.tr),
-                                    trailing:
-                                        const Icon(Icons.arrow_forward_ios),
-                                  ),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: Container(
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(12),
+                              //       border: Border.all(
+                              //         color: Colors.grey.shade300,
+                              //       ),
+                              //     ),
+                              //     child: ListTile(
+                              //       leading: const Icon(IconlyLight.profile),
+                              //       onTap: map[uid]['role'] == "foodRider"
+                              //           ? () {
+                              //               Get.to(() =>
+                              //                   const FoodDriverOrdersDetailsScreen());
+                              //             }
+                              //           : null,
+                              //       title: Text('foodDrivier'.tr),
+                              //       trailing:
+                              //           const Icon(Icons.arrow_forward_ios),
+                              //     ),
+                              //   ),
+                              // ),
                               CustomListTile(
                                 tileText: 'theme'.tr,
                                 tileIcon: Icons.dark_mode_outlined,

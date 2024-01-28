@@ -22,15 +22,9 @@ class FoodProviderViewButton extends StatelessWidget {
     // Get the current brightness mode (light or dark) from the theme
     final Brightness currentBrightness = Theme.of(context).brightness;
 
-    // Define colors for light mode and dark mode
-    const Color lightIconColor = Colors.black;
     const Color lightTextColor = Colors.black;
-    const Color darkIconColor = Colors.white; // Change to your preferred color
-    const Color darkTextColor = Colors.white; // Change to your preferred color
+    const Color darkTextColor = Colors.white;
 
-    // Determine the appropriate colors based on the current theme mode
-    final Color finalIconColor =
-        currentBrightness == Brightness.dark ? darkIconColor : lightIconColor;
     final Color finalTextColor =
         currentBrightness == Brightness.dark ? darkTextColor : lightTextColor;
 
@@ -55,13 +49,14 @@ class FoodProviderViewButton extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                size: 40, color: iconColor, // Use the final icon color
+                size: 40,
+                color: iconColor,
               ),
               const SizedBox(height: 15),
               Text(
                 iconText,
                 style: TextStyle(
-                  color: finalTextColor, // Use the final text color
+                  color: finalTextColor,
                 ),
               ),
             ],

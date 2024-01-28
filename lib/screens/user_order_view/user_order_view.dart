@@ -100,7 +100,7 @@ class _UserOrderViewState extends State<UserOrderView> {
                                       ),
                                     ),
                                     trailing: Text(
-                                      "\$ $price",
+                                      "Rs $price",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),

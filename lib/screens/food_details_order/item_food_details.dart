@@ -373,11 +373,16 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                     width: 130,
                                                     height: 25,
                                                     child: RoundIconButton(
-                                                      title: "Add to Cart",
+                                                      title: "Place Order",
                                                       size: 15,
                                                       icon: IconlyLight.bag,
                                                       color: appcolor,
                                                       onPressed: () async {
+                                                        final String newKey =
+                                                            DateTime.now()
+                                                                .microsecondsSinceEpoch
+                                                                .toString();
+
                                                         int totalPrice =
                                                             int.parse(widget
                                                                         .foodDetails[
@@ -390,6 +395,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                                 .toString();
                                                         Map<String, dynamic>
                                                             foodOrder = {
+                                                          "order": false,
                                                           "foodPrice":
                                                               totalPrice
                                                                   .toString(),
@@ -410,7 +416,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                         };
 
                                                         await orderDatabase
-                                                            .push()
+                                                            .child(newKey)
                                                             .set(foodOrder);
 
                                                         await foodProviderDatabase
@@ -418,7 +424,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                                                                     .foodDetails[
                                                                 'userId'])
                                                             .child('order')
-                                                            .push()
+                                                            .child(newKey)
                                                             .set(
                                                               foodOrder,
                                                             )
