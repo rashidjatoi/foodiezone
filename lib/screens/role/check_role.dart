@@ -3,6 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/admin/admin_view.dart';
 import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
+import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
+
+import '../food_driver_screen/food_provider_screen.dart';
 
 class RoleCheckScreen extends StatelessWidget {
   const RoleCheckScreen({super.key});
@@ -26,21 +29,20 @@ class RoleCheckScreen extends StatelessWidget {
         } else if (snapshot.hasData) {
           Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as dynamic;
           final role = map[uid]["role"];
-          // print(role);
 
           if (role == 'admin') {
-            // Navigate to admin panel
             return const AdminView();
           } else if (role == 'user') {
-            // Navigate to admin panel
             return const BottomNavigationBarView();
+          } else if (role == 'foodProvider') {
+            return const FoodProviderAccount();
+          } else if (role == 'foodRider') {
+            return const FoodDriverView();
           } else if (role == 'user') {
-            // Navigate to home screen
             return const BottomNavigationBarView();
           }
         }
 
-        // Default case, navigate to login screen
         return const BottomNavigationBarView();
       },
     );

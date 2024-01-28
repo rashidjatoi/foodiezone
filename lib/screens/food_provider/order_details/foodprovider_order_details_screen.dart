@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/services/services_constants.dart';
+import 'package:foodiezone/widgets/custom_button.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../admin/user/widgets/custom_table_widget.dart';
 
 class FoodProviderOrderDetailsScreen extends StatefulWidget {
@@ -15,6 +18,17 @@ class FoodProviderOrderDetailsScreen extends StatefulWidget {
 
 class _FoodProviderOrderDetailsScreenState
     extends State<FoodProviderOrderDetailsScreen> {
+  void openWhatsApp(String phoneNumber) async {
+    String whatsappUrl = "https://wa.me/$phoneNumber";
+
+    if (await launchUrl(Uri.parse(whatsappUrl))) {
+      await canLaunchUrl(Uri.parse(whatsappUrl));
+    } else {
+      debugPrint(
+          'Could not launch WhatsApp. Make sure the app is installed on the device.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,6 +125,19 @@ class _FoodProviderOrderDetailsScreenState
                                 ),
                               ],
                             ),
+                            const SizedBox(height: 15),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: CustomButton(
+                                btnText: 'WhatsApp Me',
+                                btnColor: Colors.green,
+                                btnMargin: 0,
+                                ontap: () {
+                                  openWhatsApp(map[uid]['phone'].toString());
+                                },
+                              ),
+                            )
                           ],
                         );
                       }

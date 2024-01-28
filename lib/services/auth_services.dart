@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodiezone/screens/role/check_role.dart';
 import 'package:get/get.dart';
 
-import '../screens/bottom_navigation/bottom_nav_bar.dart';
 import '../utils/utils.dart';
 import 'services_constants.dart';
 
@@ -42,7 +42,7 @@ class AuthServices {
               ),
               if (firebaseAuth.currentUser != null)
                 {
-                  Get.offAll(() => const BottomNavigationBarView()),
+                  Get.offAll(() => const RoleCheckScreen()),
                 }
             },
           );

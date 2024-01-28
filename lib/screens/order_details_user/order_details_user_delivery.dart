@@ -33,15 +33,21 @@ class _OrderDetailsUserDeliveryState extends State<OrderDetailsUserDelivery> {
                     alignment: Alignment.topLeft,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Card(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey.shade300,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: ListTile(
                           onTap: () {
                             Get.to(() => DeliveryDriverDetailsForUser(
                                 deliveryDriverId:
                                     map['driver']['uid'].toString()));
                           },
-                          leading: const CircleAvatar(
-                              child: Icon(IconlyLight.profile)),
+                          // leading: const CircleAvatar(
+                          //     child: Icon(IconlyLight.profile)),
                           title: Text(map['driver']['email'].toString()),
                           subtitle: const Text(
                             'Click to see details',
@@ -59,7 +65,7 @@ class _OrderDetailsUserDeliveryState extends State<OrderDetailsUserDelivery> {
                   );
                 }
 
-                return Column(
+                return const Column(
                   mainAxisAlignment:
                       MainAxisAlignment.center, // Adjust as needed
                   children: [

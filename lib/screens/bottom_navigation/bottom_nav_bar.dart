@@ -44,10 +44,10 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey
+                    ? customThemeColor
                     : customThemeColor,
                 blurRadius:
-                    Theme.of(context).brightness == Brightness.dark ? 9.3 : 0.9,
+                    Theme.of(context).brightness == Brightness.dark ? 9.3 : 9.3,
               )
             ]),
         child: Row(

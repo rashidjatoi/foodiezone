@@ -34,8 +34,6 @@ class _FoodDriverOrdersDetailsScreenState
                   Map<dynamic, dynamic>? map =
                       snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
 
-                  // print(map);
-
                   if (map == null || map.isEmpty) {
                     return const Center(
                       child: Text('No data available'),
@@ -80,7 +78,13 @@ class _FoodDriverOrdersDetailsScreenState
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Card(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                    ),
+                                  ),
                                   child: ListTile(
                                     leading: ClipOval(
                                       child: Image.network(
@@ -95,7 +99,13 @@ class _FoodDriverOrdersDetailsScreenState
                                       foodDescription,
                                       maxLines: 1,
                                     ),
-                                    trailing: Text('\$$foodPrice'),
+                                    trailing: Text(
+                                      'Rs: $foodPrice',
+                                      style: const TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/screens/food_provider_details_to_client/food_provider_details_to_client.dart';
@@ -73,6 +71,7 @@ class _HomeViewState extends State<HomeView> {
                     style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "DMSans Bold",
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                   Text(
@@ -80,6 +79,7 @@ class _HomeViewState extends State<HomeView> {
                     style: const TextStyle(
                       fontSize: 16,
                       color: appcolor,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
@@ -87,7 +87,6 @@ class _HomeViewState extends State<HomeView> {
             ),
             Expanded(
               child: FirebaseAnimatedList(
-                // scrollDirection: Axis.vertical,
                 query: foodProviderDatabase,
                 itemBuilder: (context, snapshot, animation, index) {
                   if (snapshot.value != null) {
@@ -97,8 +96,6 @@ class _HomeViewState extends State<HomeView> {
                     final userImage = snapshot.child('imageUrl').value;
                     final address = snapshot.child('address').value;
                     final phone = snapshot.child('phone').value;
-
-                    // debugPrint(snapshot.value.toString());
 
                     final foodImage =
                         snapshot.child('food').child("imageUrl").value;
@@ -110,7 +107,6 @@ class _HomeViewState extends State<HomeView> {
                         snapshot.child('food').child("fooditemname").value;
                     final providerName = snapshot.child('username').value;
                     final email = snapshot.child('email').value;
-                    // print(foodItemName);
 
                     final Map<String, dynamic> userData = {
                       "username": providerName,
@@ -125,92 +121,111 @@ class _HomeViewState extends State<HomeView> {
                       "foodItemName": foodItemName
                     };
                     final image = snapshot.child('imageUrl').value;
-                    return CupertinoButton(
-                      onPressed: () {
-                        Get.to(() => FoodProviderDetailsToClientView(
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(
+                            () => FoodProviderDetailsToClientView(
                               userData: userData,
-                            ));
-                      },
-                      padding: const EdgeInsets.all(0),
-                      child: Card(
+                            ),
+                          );
+                        },
                         child: Container(
                           height: 120,
                           width: 400,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                            ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                Row(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 40,
-                                      child: image != null
-                                          ? ClipOval(
-                                              child: CachedNetworkImage(
-                                                imageUrl: snapshot
-                                                    .child('imageUrl')
-                                                    .value
-                                                    .toString(),
-                                                fit: BoxFit.cover,
-                                                width: 100,
-                                                height: 100,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
-                                                errorWidget: (context, url,
-                                                        error) =>
-                                                    const Icon(
-                                                        IconlyBold.profile,
-                                                        color: Colors.white),
-                                              ),
-                                            )
-                                          : const Icon(
-                                              IconlyBold.profile,
-                                              color: Colors.white,
-                                            ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      providerName.toString(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: "DMSans Bold",
-                                      ),
-                                    ),
-                                    Row(
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Text(address.toString()),
+                                        image != null
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshot
+                                                      .child('imageUrl')
+                                                      .value
+                                                      .toString(),
+                                                  fit: BoxFit.cover,
+                                                  width: 100,
+                                                  height: 100,
+                                                  placeholder: (context, url) =>
+                                                      const CircularProgressIndicator(),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      const Icon(
+                                                          IconlyBold.profile,
+                                                          color: Colors.white),
+                                                ),
+                                              )
+                                            : const Icon(
+                                                IconlyBold.profile,
+                                                color: Colors.white,
+                                              ),
                                       ],
                                     ),
-                                    RatingBar.builder(
-                                      initialRating: 3,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemSize: 20,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 0.0),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.black,
-                                        size: 4,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        debugPrint(rating.toString());
-                                      },
-                                    ),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          providerName.toString(),
+                                          style: const TextStyle(
+                                            fontSize: 22,
+                                            fontFamily: "DMSans Bold",
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(address.toString()),
+                                          ],
+                                        ),
+                                        Text(phone.toString()),
+                                        // RatingBar.builder(
+                                        //   initialRating: 3,
+                                        //   minRating: 1,
+                                        //   direction: Axis.horizontal,
+                                        //   allowHalfRating: true,
+                                        //   itemCount: 5,
+                                        //   itemSize: 20,
+                                        //   itemPadding: const EdgeInsets.symmetric(
+                                        //       horizontal: 0.0),
+                                        //   itemBuilder: (context, _) => const Icon(
+                                        //     Icons.star,
+                                        //     color: Colors.black,
+                                        //     size: 4,
+                                        //   ),
+                                        //   onRatingUpdate: (rating) {
+                                        //     debugPrint(rating.toString());
+                                        //   },
+                                        // ),
+                                      ],
+                                    )
                                   ],
+                                ),
+                                Icon(
+                                  IconlyLight.arrow_right,
+                                  color: Colors.grey.shade400,
                                 )
                               ],
                             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/screens/food_driver_screen/food_driver_create_account_screen.dart';
 import 'package:foodiezone/screens/food_driver_screen/food_driver_orders_details_screen.dart';
-import 'package:foodiezone/screens/food_provider/widgets/admin_view_btn.dart';
+import 'package:foodiezone/services/auth_services.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
@@ -19,46 +20,52 @@ class _FoodDriverViewState extends State<FoodDriverView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Food Delevery'),
+        title: const Text('Food Delivery'),
         centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => const FoodDriverAccountDetailsView());
+            },
+            icon: const Icon(
+              IconlyLight.edit,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              AuthServices.signOutUser().then(
+                (value) => Get.offAll(
+                  () => const LoginView(),
+                ),
+              );
+            },
+            icon: const Icon(
+              IconlyLight.logout,
+            ),
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              FoodProviderViewButton(
-                ontap: () {
-                  Get.to(() => const FoodDriverAccountDetailsView());
-                },
-                icon: IconlyBold.profile,
-                iconColor: appcolor,
-                iconText: "Create Profile",
-              ),
-              FoodProviderViewButton(
-                ontap: () {
-                  Get.to(() => const FoodDriverOrdersDetailsScreen());
-                },
-                icon: IconlyBold.bookmark,
-                iconText: "View Food Orders",
-              ),
-            ],
+          Center(
+            child: Image.asset(
+              "assets/images/foodDriver.png",
+              height: 250,
+            ),
           ),
-          // Row(
-          //   children: [
-          //     FoodProviderViewButton(
-          //       ontap: () {},
-          //       icon: IconlyBold.profile,
-          //       iconText: "Pending Orders",
-          //     ),
-          //     FoodProviderViewButton(
-          //       ontap: () {},
-          //       icon: IconlyBold.profile,
-          //       iconText: "Confirm Orders",
-          //     ),
-          //   ],
-          // ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: appcolor,
+        onPressed: () {
+          Get.to(() => const FoodDriverOrdersDetailsScreen());
+        },
+        child: const Icon(
+          Icons.remove_red_eye_outlined,
+          color: Colors.white,
+        ),
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-import '../food_details_order/food_details_order.dart';
+import '../food_details_order/item_food_details.dart';
 
 class FoodProviderDetailsToClientView extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -67,99 +67,92 @@ class _FoodProviderDetailsToClientViewState
 
                   final foodItemName = snapshot.child("fooditemname").value;
 
-                  return Card(
-                    color: Colors.white,
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(10),
-                      child: InkWell(
-                        onTap: () {
-                          Map<String, dynamic> foodDetails = {
-                            "foodPrice": price,
-                            "foodImage": foodImage,
-                            "foodDescription": foodDescription,
-                            "foodItemName": foodItemName,
-                            "userId": userId,
-                          };
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Map<String, dynamic> foodDetails = {
+                          "foodPrice": price,
+                          "foodImage": foodImage,
+                          "foodDescription": foodDescription,
+                          "foodItemName": foodItemName,
+                          "userId": userId,
+                        };
 
-                          Get.to(() => FoodDetailsOrderView(
-                                foodDetails: foodDetails,
-                              ));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: CachedNetworkImage(
-                                    imageUrl: foodImage.toString(),
-                                    fit: BoxFit.cover,
-                                    width: 80,
-                                    height: 80,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(
-                                      IconlyBold.profile,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          foodItemName.toString(),
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: "DMSans Bold",
-                                          ),
-                                        ),
-                                        Text(
-                                          truncateText(
-                                            foodDescription.toString(),
-                                            4,
-                                          ),
-                                          style: const TextStyle(
-                                              color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "\$$price ",
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: appcolor,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                const CircleAvatar(
-                                  radius: 18,
-                                  backgroundColor: appcolor,
-                                  child: Icon(
-                                    IconlyLight.heart,
+                        // Get.to(() => FoodDetailsOrderView(
+                        //       foodDetails: foodDetails,
+                        //     ));
+
+                        Get.to(() => ItemDetailsView(
+                              foodDetails: foodDetails,
+                            ));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: CachedNetworkImage(
+                                  imageUrl: foodImage.toString(),
+                                  fit: BoxFit.cover,
+                                  width: 80,
+                                  height: 80,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    IconlyBold.profile,
                                     color: Colors.white,
                                   ),
-                                )
-                              ],
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        foodItemName.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: "DMSans Bold",
+                                        ),
+                                      ),
+                                      Text(
+                                        truncateText(
+                                          foodDescription.toString(),
+                                          4,
+                                        ),
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "Rs: $price ",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: appcolor,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );

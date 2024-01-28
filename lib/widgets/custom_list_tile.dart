@@ -16,20 +16,31 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        tileIcon,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white
-            : Colors.grey.shade700,
-      ),
-      onTap: ontap,
-      title: Text(tileText),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white
-            : Colors.black54,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.grey.shade300,
+          ),
+        ),
+        child: ListTile(
+          leading: Icon(
+            tileIcon,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.grey.shade700,
+          ),
+          onTap: ontap,
+          title: Text(tileText),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black54,
+          ),
+        ),
       ),
     );
   }

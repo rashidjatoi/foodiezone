@@ -68,6 +68,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/foodProvider.png
+    - assets/images/foodDriver.png
     - assets/images/images/
     - assets/images/real/
     - assets/images/virtual/

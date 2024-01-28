@@ -7,6 +7,7 @@ import 'package:foodiezone/services/services_constants.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:iconly/iconly.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FoodDriverUserOrderDetailsView extends StatefulWidget {
   final Map<String, dynamic> orderData;
@@ -20,6 +21,17 @@ class FoodDriverUserOrderDetailsView extends StatefulWidget {
 
 class _FoodDriverUserOrderDetailsViewState
     extends State<FoodDriverUserOrderDetailsView> {
+  void openWhatsApp(String phoneNumber) async {
+    String whatsappUrl = "https://wa.me/$phoneNumber";
+
+    if (await launchUrl(Uri.parse(whatsappUrl))) {
+      await canLaunchUrl(Uri.parse(whatsappUrl));
+    } else {
+      debugPrint(
+          'Could not launch WhatsApp. Make sure the app is installed on the device.');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +52,7 @@ class _FoodDriverUserOrderDetailsViewState
                   stream: firebaseDatabase.onValue,
                   builder: (BuildContext context,
                       AsyncSnapshot<DatabaseEvent> snapshot) {
-                    final user = widget.orderData["uid"].toString();
+                    final user = widget.orderData["providerUserId"].toString();
 
                     final uid = user;
 
@@ -90,49 +102,64 @@ class _FoodDriverUserOrderDetailsViewState
                                   ),
                                 ),
                           const SizedBox(height: 15),
-                          Table(
-                            border: TableBorder.all(
-                              color: Colors.grey.shade300,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Table(
+                              border: TableBorder.all(
+                                color: Colors.grey.shade300,
+                              ),
+                              children: [
+                                customTableWidget(
+                                  headingText: "Client Name",
+                                  dataText: map[uid]['username'].toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Email",
+                                  dataText: map[uid]['email'].toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Gender",
+                                  dataText: map[uid]['gender'].toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Phone",
+                                  dataText: map[uid]['phone'].toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Order",
+                                  dataText: widget.orderData["foodItemName"]
+                                      .toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Price",
+                                  dataText:
+                                      widget.orderData["foodPrice"].toString(),
+                                ),
+                                customTableWidget(
+                                  headingText: "Address",
+                                  dataText: map[uid]['address'].toString(),
+                                ),
+                              ],
                             ),
-                            children: [
-                              customTableWidget(
-                                headingText: "Client Name",
-                                dataText: map[uid]['username'].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Email",
-                                dataText: map[uid]['email'].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Gender",
-                                dataText: map[uid]['gender'].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Phone",
-                                dataText: map[uid]['phone'].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Order",
-                                dataText:
-                                    widget.orderData["foodItemName"].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Price",
-                                dataText:
-                                    widget.orderData["foodPrice"].toString(),
-                              ),
-                              customTableWidget(
-                                headingText: "Address",
-                                dataText: map[uid]['address'].toString(),
-                              ),
-                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomButton(
+                              btnText: 'WhatsApp Me',
+                              btnColor: Colors.green,
+                              btnMargin: 0,
+                              ontap: () {
+                                openWhatsApp(map[uid]['phone'].toString());
+                              },
+                            ),
                           ),
                         ],
                       );
                     }
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
                 CustomButton(
                   btnText: 'Food Provider Details',
                   btnRadius: 6,
@@ -141,7 +168,7 @@ class _FoodDriverUserOrderDetailsViewState
                       context,
                       MaterialPageRoute(
                         builder: (context) => FoodDriverFoodPrviderScreen(
-                          userId: widget.orderData["providerUserId"].toString(),
+                          userId: widget.orderData["uid"].toString(),
                         ),
                       ),
                     );
@@ -151,7 +178,6 @@ class _FoodDriverUserOrderDetailsViewState
                 CustomButton(
                   btnText: 'Pick Order',
                   btnRadius: 6,
-                  btnColor: Colors.green,
                   ontap: () async {
                     final String driverUserId = firebaseAuth.currentUser!.uid;
                     final String driverUserEmail =

@@ -42,21 +42,13 @@ class _UserOrderViewState extends State<UserOrderView> {
                     Map<dynamic, dynamic> map =
                         snapshot.data!.snapshot.value as dynamic;
 
-                    // print(map);
                     List<dynamic> list = [];
                     list.clear();
                     list = map.values.toList();
                     if (map[uid]['order'] != null) {
-                      // debugPrint(map[uid]['order'].toString());
-                      // final foodItemName =
-                      //     map[uid]['order']['foodItemName'].toString();
-                      // final price = map[uid]['order']['foodPrice'].toString();
-                      // final userId = map[uid]['order']['userId'].toString();
-
                       final data = snapshot.data!.snapshot.value
                           as Map<dynamic, dynamic>;
 
-                      // print(map[uid]['order']);
                       if (data.containsKey(uid) && data[uid]['order'] != null) {
                         final orderMap =
                             data[uid]['order'] as Map<dynamic, dynamic>;
@@ -80,29 +72,38 @@ class _UserOrderViewState extends State<UserOrderView> {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Card(
-                                color: Colors.white,
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    child: ClipOval(
-                                      child: CachedNetworkImage(
-                                        imageUrl: foodImage,
-                                        fit: BoxFit.fill,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                    ),
+                                  ),
+                                  child: ListTile(
+                                    onTap: () {},
+                                    leading: CircleAvatar(
+                                      child: ClipOval(
+                                        child: CachedNetworkImage(
+                                          imageUrl: foodImage,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  title: Text(foodItemName),
-                                  subtitle: Text(
-                                    foodDesc,
-                                    maxLines: 1,
-                                    style: const TextStyle(
-                                      color: Colors.grey,
+                                    title: Text(foodItemName),
+                                    subtitle: Text(
+                                      foodDesc,
+                                      maxLines: 1,
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                  trailing: Text(
-                                    "\$ $price",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                    trailing: Text(
+                                      "\$ $price",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -112,10 +113,19 @@ class _UserOrderViewState extends State<UserOrderView> {
                         );
                       }
                     } else {
-                      return const ListTile();
+                      return const Center(
+                        child: Text(
+                          "No Orders Available",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: "DMSans Medium",
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      );
                     }
 
-                    return const Text("data");
+                    return const Text("");
                   }
                 }),
           ),

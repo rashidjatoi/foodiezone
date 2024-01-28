@@ -47,70 +47,87 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         );
                       } else {
                         var foodProvider = list[index];
-                        var foods = foodProvider['order'];
 
-                        if (foods == null || foods.isEmpty) {
-                          return const Align(
-                            alignment: Alignment.center,
-                            child: Center(
-                              child: Text('No orders found for this provider'),
-                            ),
-                          );
-                        }
+                        if (foodProvider['userId'] ==
+                            firebaseAuth.currentUser!.uid) {
+                          var foods = foodProvider['order'];
 
-                        if (foods is Map) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0,
-                              vertical: 5,
-                            ),
-                            child: Column(
-                              children: foods.entries.map((foodEntry) {
-                                var foodItem =
-                                    foodEntry.value as Map<dynamic, dynamic>;
+                          if (foods == null || foods.isEmpty) {
+                            return const Align(
+                              alignment: Alignment.center,
+                              child: Center(
+                                child: Text(''),
+                              ),
+                            );
+                          }
 
-                                // print(foodItem["currentUserId"]);
+                          if (foods is Map) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0,
+                                vertical: 5,
+                              ),
+                              child: Column(
+                                children: foods.entries.map((foodEntry) {
+                                  var foodItem =
+                                      foodEntry.value as Map<dynamic, dynamic>;
 
-                                return GestureDetector(
-                                  onTap: () {
-                                    Map<String, dynamic> orderData = {
-                                      "foodItemName": foodItem['foodItemName'],
-                                      "foodPrice": foodItem['foodPrice'],
-                                      "uid": foodItem["currentUserId"],
-                                    };
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Map<String, dynamic> orderData = {
+                                        "foodItemName":
+                                            foodItem['foodItemName'],
+                                        "foodPrice": foodItem['foodPrice'],
+                                        "uid": foodItem["currentUserId"],
+                                      };
 
-                                    Get.to(
-                                      () => FoodProviderOrderDetailsScreen(
-                                        orderData: orderData,
-                                      ),
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      ListTile(
-                                        leading: Image.network(
-                                          foodItem['foodImage'],
-                                          width: 50,
-                                          height: 50,
-                                          fit: BoxFit.cover,
+                                      Get.to(
+                                        () => FoodProviderOrderDetailsScreen(
+                                          orderData: orderData,
                                         ),
-                                        title: Text(foodItem['foodItemName']),
-                                        subtitle:
-                                            Text(foodItem['foodDescription']),
-                                        trailing:
-                                            Text('\$${foodItem['foodPrice']}'),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          );
+                                      );
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.grey.shade300,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: ListTile(
+                                            leading: Image.network(
+                                              foodItem['foodImage'],
+                                              width: 50,
+                                              height: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            title:
+                                                Text(foodItem['foodItemName']),
+                                            subtitle: Text(
+                                                foodItem['foodDescription']),
+                                            trailing: Text(
+                                              'Rs: ${foodItem['foodPrice']}',
+                                              style: const TextStyle(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            );
+                          }
+
+                          return const Text('');
                         } else {
-                          return const Center(
-                            child:
-                                Text('Orders format invalid for this provider'),
-                          );
+                          return const Text('');
                         }
                       }
                     },

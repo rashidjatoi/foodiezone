@@ -141,7 +141,8 @@ class _FoodItemsViewState extends State<FoodItemsView> {
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
-                                            foodDescription.toString(),
+                                            truncateText(
+                                                foodDescription.toString(), 6),
                                             style: const TextStyle(
                                               fontFamily: "DMsans-Medium",
                                               fontSize: 16,

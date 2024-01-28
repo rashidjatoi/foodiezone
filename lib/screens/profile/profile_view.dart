@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
-import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
 import 'package:foodiezone/screens/profile/profile_details_view.dart';
 import 'package:foodiezone/screens/theme/change_theme_view.dart';
 import 'package:foodiezone/services/auth_services.dart';
@@ -71,28 +70,36 @@ class ProfileView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  child: image != null
-                                      ? ClipOval(
-                                          child: CachedNetworkImage(
-                                            imageUrl: map[uid]["imageUrl"],
-                                            fit: BoxFit.cover,
-                                            width: 80,
-                                            height: 80,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(), // Placeholder while loading
-                                            errorWidget: (context, url,
-                                                    error) =>
-                                                const Icon(IconlyBold.profile,
-                                                    color: Colors
-                                                        .white), // Error widget
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                    ),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    child: image != null
+                                        ? ClipOval(
+                                            child: CachedNetworkImage(
+                                              imageUrl: map[uid]["imageUrl"],
+                                              fit: BoxFit.cover,
+                                              width: 80,
+                                              height: 80,
+                                              placeholder: (context, url) =>
+                                                  const CircularProgressIndicator(), // Placeholder while loading
+                                              errorWidget: (context, url,
+                                                      error) =>
+                                                  const Icon(IconlyBold.profile,
+                                                      color: Colors
+                                                          .white), // Error widget
+                                            ),
+                                          )
+                                        : const Icon(
+                                            IconlyBold.profile,
+                                            color: Colors.white,
                                           ),
-                                        )
-                                      : const Icon(
-                                          IconlyBold.profile,
-                                          color: Colors.white,
-                                        ),
+                                  ),
                                 ),
                                 const SizedBox(width: 20),
                                 Column(
@@ -154,27 +161,39 @@ class ProfileView extends StatelessWidget {
                                       ProfileDetailsView(userData: userData));
                                 },
                               ),
-                              ListTile(
-                                leading: const Icon(IconlyLight.profile),
-                                onTap: map[uid]['role'] == "foodProvider"
-                                    ? () {
-                                        Get.to(
-                                            () => const FoodProviderAccount());
-                                      }
-                                    : null,
-                                title: Text('foodProvider'.tr),
-                                trailing: const Icon(Icons.arrow_forward_ios),
-                              ),
-                              ListTile(
-                                leading: const Icon(IconlyLight.profile),
-                                onTap: map[uid]['role'] == "foodRider"
-                                    ? () {
-                                        Get.to(() =>
-                                            const FoodDriverOrdersDetailsScreen());
-                                      }
-                                    : null,
-                                title: Text('foodDrivier'.tr),
-                                trailing: const Icon(Icons.arrow_forward_ios),
+                              // ListTile(
+                              //   leading: const Icon(IconlyLight.profile),
+                              //   onTap: map[uid]['role'] == "foodProvider"
+                              //       ? () {
+                              //           Get.to(
+                              //               () => const FoodProviderAccount());
+                              //         }
+                              //       : null,
+                              //   title: Text('foodProvider'.tr),
+                              //   trailing: const Icon(Icons.arrow_forward_ios),
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                    ),
+                                  ),
+                                  child: ListTile(
+                                    leading: const Icon(IconlyLight.profile),
+                                    onTap: map[uid]['role'] == "foodRider"
+                                        ? () {
+                                            Get.to(() =>
+                                                const FoodDriverOrdersDetailsScreen());
+                                          }
+                                        : null,
+                                    title: Text('foodDrivier'.tr),
+                                    trailing:
+                                        const Icon(Icons.arrow_forward_ios),
+                                  ),
+                                ),
                               ),
                               CustomListTile(
                                 tileText: 'theme'.tr,

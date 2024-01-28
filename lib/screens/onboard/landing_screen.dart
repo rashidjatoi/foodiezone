@@ -5,6 +5,7 @@ import 'package:foodiezone/screens/auth/register/signup_view.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:shadow_clip/shadow_clip.dart';
+
 import '../../utils/helper.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -67,6 +68,7 @@ class LandingScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontFamily: "DMSans Medium",
+                        fontSize: 12,
                       ),
                     ),
                   ),

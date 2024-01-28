@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/screens/food_details_order/food_details_order.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+
+import '../food_details_order/item_food_details.dart';
 
 class SearchFoodScreen extends StatefulWidget {
   const SearchFoodScreen({super.key});
@@ -44,7 +45,7 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: Colors.grey),
+                border: Border.all(color: Colors.grey.shade300),
               ),
               child: TextFormField(
                 controller: searchController,
@@ -111,7 +112,7 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                                           .toString()
                                           .toLowerCase(),
                                     )) {
-                                  return GestureDetector(
+                                  return InkWell(
                                     onTap: () {
                                       final Map<String, dynamic> foodDetails = {
                                         "username": foodProvider['username'],
@@ -123,92 +124,105 @@ class _SearchFoodScreenState extends State<SearchFoodScreen> {
                                       };
 
                                       Get.to(
-                                        FoodDetailsOrderView(
+                                        ItemDetailsView(
                                           foodDetails: foodDetails,
                                         ),
                                       );
                                     },
-                                    child: Card(
-                                      margin: const EdgeInsets.all(8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                      ),
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                             borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(12),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: foodItem['imageUrl']
-                                                  .toString(),
-                                              fit: BoxFit.cover,
-                                              height: 250,
-                                              width: double.infinity,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(
-                                                IconlyBold.image,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
+                                                BorderRadius.circular(12),
+                                            border: Border.all(
+                                              color: Colors.grey.shade300,
+                                            )),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      'Food Provider: ',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily:
-                                                              "DMSans Medium"),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(12),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        foodItem['imageUrl']
+                                                            .toString(),
+                                                    fit: BoxFit.cover,
+                                                    height: 120,
+                                                    width: 120,
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        const CircularProgressIndicator(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            const Icon(
+                                                      IconlyBold.image,
+                                                      color: Colors.white,
                                                     ),
-                                                    Text(foodProvider[
-                                                        'username']),
-                                                  ],
+                                                  ),
                                                 ),
-                                                Row(
+                                                const SizedBox(width: 15),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
-                                                      'Food Item Name: ',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily:
-                                                              "DMSans Medium"),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          foodItem[
+                                                              'fooditemname'],
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily:
+                                                                "DMSans Medium",
+                                                            fontSize: 20,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(foodItem[
-                                                        'fooditemname']),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      'Price: ',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily:
-                                                              "DMSans Medium"),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'By: ',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                "DMSans Medium",
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          foodProvider[
+                                                              'username'],
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(foodItem['price']),
+                                                    Row(
+                                                      children: [
+                                                        const Text(
+                                                          'Rs: ',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                "DMSans Medium",
+                                                          ),
+                                                        ),
+                                                        Text(foodItem['price']),
+                                                      ],
+                                                    ),
                                                   ],
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );
