@@ -206,11 +206,11 @@ class ProfileView extends StatelessWidget {
                                 tileText: 'Delivery Details',
                                 tileIcon: Icons.delivery_dining,
                                 ontap: () {
-                                  if (map[uid]['role'] != "foodRider") {
-                                    return;
-                                  } else {
+                                  if (map[uid]['role'] == "user") {
                                     Get.to(
                                         () => const OrderDetailsUserDelivery());
+                                  } else {
+                                    return;
                                   }
                                 },
                               ),

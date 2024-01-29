@@ -45,9 +45,7 @@ class _FoodDriverOrdersDetailsScreenState
                     itemCount: list.isEmpty ? 1 : list.length,
                     itemBuilder: (context, index) {
                       if (list.isEmpty) {
-                        return const Center(
-                          child: Text('No orders found'),
-                        );
+                        return null;
                       } else {
                         var foodProvider = list[index];
                         final foodPrice = foodProvider["foodPrice"];
@@ -55,9 +53,13 @@ class _FoodDriverOrdersDetailsScreenState
                         final foodItemName = foodProvider["foodItemName"];
                         final foodImage = foodProvider["foodImage"];
                         final userId = foodProvider["userId"];
-                        final orderKey = foodProvider["order"];
+                        // final orderKey = foodProvider["order"];
                         final foodProviderUserId =
                             foodProvider["currentUserId"];
+                        // Assuming orderKey is a boolean value in your data
+                        final orderKey = foodProvider["order"];
+
+// Check if orderKey is true before displaying the item
                         if (orderKey == true) {
                           return GestureDetector(
                             onTap: () {
@@ -114,18 +116,7 @@ class _FoodDriverOrdersDetailsScreenState
                             ),
                           );
                         } else {
-                          return const Padding(
-                            padding: EdgeInsets.only(top: 300),
-                            child: Center(
-                              child: Text(
-                                'No Orders',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'DMSans Medium',
-                                ),
-                              ),
-                            ),
-                          );
+                          return Container();
                         }
                       }
                     },

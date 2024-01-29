@@ -39,168 +39,172 @@ class _FoodDriverUserOrderDetailsViewState
         title: const Text("Orders Details"),
         centerTitle: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                StreamBuilder(
-                  stream: firebaseDatabase.onValue,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DatabaseEvent> snapshot) {
-                    final user = widget.orderData["providerUserId"].toString();
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  StreamBuilder(
+                    stream: firebaseDatabase.onValue,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DatabaseEvent> snapshot) {
+                      final user =
+                          widget.orderData["providerUserId"].toString();
 
-                    final uid = user;
+                      final uid = user;
 
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        Map<dynamic, dynamic> map =
+                            snapshot.data!.snapshot.value as dynamic;
+
+                        final image = map[uid]?["imageUrl"];
+
+                        List<dynamic> list = [];
+                        list.clear();
+                        list = map.values.toList();
+
+                        return Column(
                           children: [
-                            CircularProgressIndicator(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      Map<dynamic, dynamic> map =
-                          snapshot.data!.snapshot.value as dynamic;
-
-                      final image = map[uid]?["imageUrl"];
-
-                      List<dynamic> list = [];
-                      list.clear();
-                      list = map.values.toList();
-
-                      return Column(
-                        children: [
-                          image != null && image.isNotEmpty
-                              ? ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl: image,
-                                    height: 100,
-                                  ),
-                                )
-                              : const ClipOval(
-                                  child: CircleAvatar(
-                                    radius: 50,
-                                    backgroundColor: Colors.black,
-                                    child: Icon(
-                                      IconlyLight.profile,
-                                      size: 40,
-                                      color: Colors.white,
+                            image != null && image.isNotEmpty
+                                ? ClipOval(
+                                    child: CachedNetworkImage(
+                                      imageUrl: image,
+                                      height: 100,
+                                    ),
+                                  )
+                                : const ClipOval(
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Colors.black,
+                                      child: Icon(
+                                        IconlyLight.profile,
+                                        size: 40,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
+                            const SizedBox(height: 15),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Table(
+                                border: TableBorder.all(
+                                  color: Colors.grey.shade300,
                                 ),
-                          const SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Table(
-                              border: TableBorder.all(
-                                color: Colors.grey.shade300,
+                                children: [
+                                  customTableWidget(
+                                    headingText: "Client Name",
+                                    dataText: map[uid]['username'].toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Email",
+                                    dataText: map[uid]['email'].toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Gender",
+                                    dataText: map[uid]['gender'].toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Phone",
+                                    dataText: map[uid]['phone'].toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Order",
+                                    dataText: widget.orderData["foodItemName"]
+                                        .toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Price",
+                                    dataText: widget.orderData["foodPrice"]
+                                        .toString(),
+                                  ),
+                                  customTableWidget(
+                                    headingText: "Address",
+                                    dataText: map[uid]['address'].toString(),
+                                  ),
+                                ],
                               ),
-                              children: [
-                                customTableWidget(
-                                  headingText: "Client Name",
-                                  dataText: map[uid]['username'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Email",
-                                  dataText: map[uid]['email'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Gender",
-                                  dataText: map[uid]['gender'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Phone",
-                                  dataText: map[uid]['phone'].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Order",
-                                  dataText: widget.orderData["foodItemName"]
-                                      .toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Price",
-                                  dataText:
-                                      widget.orderData["foodPrice"].toString(),
-                                ),
-                                customTableWidget(
-                                  headingText: "Address",
-                                  dataText: map[uid]['address'].toString(),
-                                ),
-                              ],
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomButton(
-                              btnText: 'WhatsApp Me',
-                              btnColor: Colors.green,
-                              btnMargin: 0,
-                              ontap: () {
-                                openWhatsApp(map[uid]['phone'].toString());
-                              },
+                            const SizedBox(height: 15),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomButton(
+                                btnText: 'WhatsApp Me',
+                                btnColor: Colors.green,
+                                btnMargin: 0,
+                                ontap: () {
+                                  openWhatsApp(map[uid]['phone'].toString());
+                                },
+                              ),
                             ),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 5),
+                  CustomButton(
+                    btnText: 'Food Provider Details',
+                    btnRadius: 6,
+                    ontap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodDriverFoodPrviderScreen(
+                            userId: widget.orderData["uid"].toString(),
                           ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-                const SizedBox(height: 5),
-                CustomButton(
-                  btnText: 'Food Provider Details',
-                  btnRadius: 6,
-                  ontap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FoodDriverFoodPrviderScreen(
-                          userId: widget.orderData["uid"].toString(),
                         ),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  btnText: 'Pick Order',
-                  btnRadius: 6,
-                  ontap: () async {
-                    final String driverUserId = firebaseAuth.currentUser!.uid;
-                    final String driverUserEmail =
-                        firebaseAuth.currentUser!.email.toString();
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  CustomButton(
+                    btnText: 'Pick Order',
+                    btnRadius: 6,
+                    ontap: () async {
+                      final String driverUserId = firebaseAuth.currentUser!.uid;
+                      final String driverUserEmail =
+                          firebaseAuth.currentUser!.email.toString();
 
-                    await firebaseDatabase
-                        .child(uid.toString())
-                        .child('driver')
-                        .set(
-                      {
-                        "uid": driverUserId.toString(),
-                        "email": driverUserEmail.toString(),
-                      },
-                    ).then((value) => Utils.showToast(
-                              message: 'Order Placed',
-                              bgColor: Colors.green,
-                              textColor: Colors.white,
-                            ));
-                  },
-                )
-              ],
-            ),
-          ],
+                      await firebaseDatabase
+                          .child(uid.toString())
+                          .child('driver')
+                          .set(
+                        {
+                          "uid": driverUserId.toString(),
+                          "email": driverUserEmail.toString(),
+                        },
+                      ).then((value) => Utils.showToast(
+                                message: 'Order Placed',
+                                bgColor: Colors.green,
+                                textColor: Colors.white,
+                              ));
+                    },
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

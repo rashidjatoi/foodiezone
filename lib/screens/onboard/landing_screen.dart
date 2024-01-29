@@ -62,16 +62,16 @@ class LandingScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Flexible(
-                    child: Text(
-                      'slogan'.tr,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontFamily: "DMSans Medium",
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
+                  // Flexible(
+                  //   child: Text(
+                  //     'slogan'.tr,
+                  //     textAlign: TextAlign.center,
+                  //     style: const TextStyle(
+                  //       fontFamily: "DMSans Medium",
+                  //       fontSize: 12,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 5),
                   CustomButton(
                     btnText: 'signin'.tr,
