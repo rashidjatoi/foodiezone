@@ -35,7 +35,6 @@ class _MyAppState extends State<MyApp> {
       ],
       builder: (context, child) {
         final themeChnager = Provider.of<ThemeChangeProvider>(context);
-
         return GetMaterialApp(
           title: 'FoodieZone',
           debugShowCheckedModeBanner: false,

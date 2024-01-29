@@ -3,10 +3,9 @@ import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/screens/food_driver_screen/food_driver_create_account_screen.dart';
 import 'package:foodiezone/screens/food_driver_screen/food_driver_orders_details_screen.dart';
 import 'package:foodiezone/services/auth_services.dart';
+import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-
-import '../../constants/colors.dart';
 
 class FoodDriverView extends StatefulWidget {
   const FoodDriverView({super.key});
@@ -51,21 +50,18 @@ class _FoodDriverViewState extends State<FoodDriverView> {
         children: [
           Center(
             child: Image.asset(
-              "assets/images/foodDriver.png",
+              "assets/images/foodDelivery.png",
               height: 250,
             ),
           ),
+          const SizedBox(height: 60),
+          CustomButton(
+            btnText: 'View Delivery Orders',
+            ontap: () {
+              Get.to(() => const FoodDriverOrdersDetailsScreen());
+            },
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: appcolor,
-        onPressed: () {
-          Get.to(() => const FoodDriverOrdersDetailsScreen());
-        },
-        child: const Icon(
-          Icons.remove_red_eye_outlined,
-          color: Colors.white,
-        ),
       ),
     );
   }

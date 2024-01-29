@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodiezone/constants/colors.dart';
 import 'package:foodiezone/services/services_constants.dart';
 import 'package:foodiezone/utils/utils.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
@@ -12,14 +10,15 @@ import 'package:foodiezone/widgets/custom_textformfield.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddFoodItemsView extends StatefulWidget {
-  const AddFoodItemsView({super.key});
+class EditFoodItemsView extends StatefulWidget {
+  final Map<String, dynamic> data;
+  const EditFoodItemsView({super.key, required this.data});
 
   @override
-  State<AddFoodItemsView> createState() => _AddFoodItemsViewState();
+  State<EditFoodItemsView> createState() => _EditFoodItemsViewState();
 }
 
-class _AddFoodItemsViewState extends State<AddFoodItemsView> {
+class _EditFoodItemsViewState extends State<EditFoodItemsView> {
   // Form Key
   final formKey = GlobalKey<FormState>();
   File? image;
@@ -48,9 +47,10 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
   @override
   void initState() {
     super.initState();
-    description = TextEditingController();
-    nameC = TextEditingController();
-    price = TextEditingController();
+    description =
+        TextEditingController(text: widget.data['foodDescription'].toString());
+    nameC = TextEditingController(text: widget.data['foodItemName'].toString());
+    price = TextEditingController(text: widget.data['price'].toString());
   }
 
   @override
@@ -65,7 +65,7 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Items"),
+        title: const Text("Update Item"),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -125,15 +125,8 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
                                             height: 100,
                                             width: 100,
                                           )
-                                        : Icon(
-                                            IconlyBold.image,
-                                            size: 50,
-                                            color:
-                                                Theme.of(context).brightness ==
-                                                        Brightness.dark
-                                                    ? customThemeColor
-                                                    : Colors.black,
-                                          ),
+                                        : Image.network(widget.data['foodImage']
+                                            .toString()),
                                   ),
                                 ),
                               ),
@@ -168,84 +161,39 @@ class _AddFoodItemsViewState extends State<AddFoodItemsView> {
                               ),
                               const SizedBox(height: 15),
                               CustomButton(
-                                btnText: "Add Product",
+                                btnText: "Update Product",
                                 loading: btnLoading,
                                 btnMargin: 0,
-                                ontap: () {
+                                ontap: () async {
                                   try {
                                     setState(() {
                                       btnLoading = true;
                                     });
 
-                                    if (image != null) {
-                                      final newId =
-                                          DateTime.now().millisecondsSinceEpoch;
-
-                                      firebase_storage.Reference ref =
-                                          firebase_storage
-                                              .FirebaseStorage.instance
-                                              .ref("/food/$newId");
-
-                                      firebase_storage.UploadTask uploadTask =
-                                          ref.putFile(image!.absolute);
-
-                                      Future.value(uploadTask)
-                                          .then((value) async {
-                                        var newUrl = await ref.getDownloadURL();
-
-                                        foodProviderDatabase
-                                            .child(map[uid]['userId'])
-                                            .child('food')
-                                            .child(newId.toString())
-                                            .set(
-                                          {
-                                            'imageUrl': newUrl,
-                                            'fooditemname':
-                                                nameC.text.toString(),
-                                            'description':
-                                                description.text.toString(),
-                                            'price': price.text.toString(),
-                                            'userId':
-                                                map[uid]['userId'].toString(),
-                                            "foodId": newId.toString(),
-                                          },
-                                        ).then((value) {
-                                          Utils.showToast(
-                                            message: 'Changes Saved',
-                                            bgColor: Colors.green,
-                                            textColor: Colors.white,
-                                          );
-                                          setState(() {
-                                            btnLoading = false;
-                                          });
-                                        });
+                                    await foodProviderDatabase
+                                        .child(map[uid]['userId'])
+                                        .child('food')
+                                        .child(widget.data['foodId'].toString())
+                                        .update(
+                                      {
+                                        'imageUrl':
+                                            widget.data['foodImage'].toString(),
+                                        'fooditemname': nameC.text.toString(),
+                                        'description':
+                                            description.text.toString(),
+                                        'price': price.text.toString(),
+                                        'userId': map[uid]['userId'].toString(),
+                                      },
+                                    ).then((value) {
+                                      Utils.showToast(
+                                        message: 'Changes Saved',
+                                        bgColor: Colors.green,
+                                        textColor: Colors.white,
+                                      );
+                                      setState(() {
+                                        btnLoading = false;
                                       });
-                                    } else {
-                                      // await hostelDatabase
-                                      //     .child(widget.userData['uid'])
-                                      //     .update(
-                                      //   {
-                                      //     'username': nameC.text.toString(),
-                                      //     'phone': phoneC.text.toString(),
-                                      //     'date': dobC.text.toString(),
-                                      //     'address': addressC.text.toString(),
-                                      //     'cninc': cnicC.text.toString(),
-                                      //     'gender': genderC.text.toString(),
-                                      //   },
-                                      // ).then(
-                                      //   (value) {
-                                      //     Utils.showToast(
-                                      //       message: 'Changes Saved',
-                                      //       bgColor: Colors.green,
-                                      //       textColor: Colors.white,
-                                      //     );
-
-                                      //     setState(() {
-                                      //       btnLoading = false;
-                                      //     });
-                                      //   },
-                                      // );
-                                    }
+                                    });
                                   } catch (e) {
                                     setState(() {
                                       btnLoading = false;

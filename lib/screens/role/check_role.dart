@@ -3,9 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/admin/admin_view.dart';
 import 'package:foodiezone/screens/bottom_navigation/bottom_nav_bar.dart';
-import 'package:foodiezone/screens/food_provider/food_provider_account/food_provider_account.dart';
 
 import '../food_driver_screen/food_provider_screen.dart';
+import '../food_provider/food_provider_account/food_provider_bottom.dart';
 
 class RoleCheckScreen extends StatelessWidget {
   const RoleCheckScreen({super.key});
@@ -35,7 +35,7 @@ class RoleCheckScreen extends StatelessWidget {
           } else if (role == 'user') {
             return const BottomNavigationBarView();
           } else if (role == 'foodProvider') {
-            return const FoodProviderAccount();
+            return const FoodBottomNavigationBarView();
           } else if (role == 'foodRider') {
             return const FoodDriverView();
           } else if (role == 'user') {

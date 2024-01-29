@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodiezone/screens/auth/login/login_view.dart';
 import 'package:foodiezone/screens/food_provider/confirm_order/confirm_orders_screen.dart';
-import 'package:foodiezone/screens/food_provider/food_items/food_items.dart';
 import 'package:foodiezone/screens/food_provider/food_provider_details/food_provider_details.dart';
 import 'package:foodiezone/services/auth_services.dart';
 import 'package:foodiezone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../constants/colors.dart';
+import '../add_food_items/add_food_items.dart';
 
 class FoodProviderAccount extends StatefulWidget {
   const FoodProviderAccount({super.key});
@@ -58,17 +57,14 @@ class _FoodProviderAccountState extends State<FoodProviderAccount> {
               Get.to(() => const ConfirmOrderScreen());
             },
           ),
+          const SizedBox(height: 10),
+          CustomButton(
+            btnText: 'Add Food Item',
+            ontap: () {
+              Get.to(() => const AddFoodItemsView());
+            },
+          ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: appcolor,
-        onPressed: () {
-          Get.to(() => const FoodItemsView());
-        },
-        child: const Icon(
-          IconlyLight.plus,
-          color: Colors.white,
-        ),
       ),
     );
   }

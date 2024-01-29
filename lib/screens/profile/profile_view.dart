@@ -201,12 +201,17 @@ class ProfileView extends StatelessWidget {
                                   Get.to(() => const ChangeThemeScreen());
                                 },
                               ),
+
                               CustomListTile(
                                 tileText: 'Delivery Details',
                                 tileIcon: Icons.delivery_dining,
                                 ontap: () {
-                                  Get.to(
-                                      () => const OrderDetailsUserDelivery());
+                                  if (map[uid]['role'] != "foodRider") {
+                                    return;
+                                  } else {
+                                    Get.to(
+                                        () => const OrderDetailsUserDelivery());
+                                  }
                                 },
                               ),
                               CustomListTile(

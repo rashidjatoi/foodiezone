@@ -337,11 +337,11 @@ class AutoScrollableListView extends StatefulWidget {
 
 class _AutoScrollableListViewState extends State<AutoScrollableListView> {
   List<String> imagesPath = [
-    "assets/images/real/apple_pie.jpg",
-    "assets/images/real/bakery.jpg",
-    "assets/images/real/breakfast.jpg",
-    "assets/images/real/coffee.jpg",
-    "assets/images/real/hamburger3.jpg",
+    "assets/images/1.jpg",
+    "assets/images/2.jpg",
+    "assets/images/3.jpg",
+    "assets/images/4.jpg",
+    "assets/images/5.jpg",
   ];
   @override
   Widget build(BuildContext context) {

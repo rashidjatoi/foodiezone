@@ -72,7 +72,7 @@ class LandingScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 5),
                   CustomButton(
                     btnText: 'signin'.tr,
                     btnMargin: 0,
