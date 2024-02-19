@@ -1,7 +1,7 @@
 # Image Gallery
 
-![Image 1](1.png)
-![Image 2](2.png)
-![Image 3](3.png)
-![Image 4](4.png)
-![Image 5](5.png)
+![Image 1](1.jpeg)
+![Image 2](2.jpeg)
+![Image 3](3.jpeg)
+![Image 4](4.jpeg)
+![Image 5](5.jpeg)
